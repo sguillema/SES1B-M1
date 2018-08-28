@@ -9,8 +9,14 @@ import {
   VBtn,
   VIcon,
   VGrid,
-  VToolbar
+  VToolbar,
+  VForm,
+  VTextField,
+  VSelect,
+  VCheckbox,
+  VBottomNav
 } from 'vuetify'
+// import Vuetify from 'vuetify'
 
 Vue.use(Vuetify, {
   components: {
@@ -22,6 +28,12 @@ Vue.use(Vuetify, {
     VBtn,
     VIcon,
     VGrid,
-    VToolbar
+    VToolbar,
+    VForm,
+    VTextField,
+    VSelect,
+    VCheckbox,
+    VBottomNav
   }
 })
+// Vue.use(Vuetify)

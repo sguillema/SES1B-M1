@@ -6,7 +6,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'application',
+    title: 'SES1B🚑🔥',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -40,7 +40,8 @@ module.exports = {
       ]
     },
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      'axios'
     ],
     extractCSS: true,
     /*
