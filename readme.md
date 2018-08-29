@@ -38,7 +38,7 @@ Once you have successfully installed the project dependencies, you can run the f
 ```
 npm run dev
 ```
-After this, make sure to run the sub server. Steps for it can be found below.
+After this, make sure to run the stub server. Steps for it can be found below.
 
 ### Running the Stub server for development
 For development, the application will use a stub server to handle API requests. In the project root directory, run the following command to start the server
