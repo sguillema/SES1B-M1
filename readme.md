@@ -48,7 +48,7 @@ npm run stub <port>
 *If you don't specify a port, the stub server will choose 4000 as the default*
 ___
 ## Back-end Development
-Back-end development is done using ClaudiaJS to deploy AWS Lambda functions. Please refer to the **Installation & Setup** section to get things ready. **Section is WIP**
+Back-end development is done using ClaudiaJS to deploy AWS Lambda functions. Please refer to the [Installation & Setup](#installation--setup) section to get things ready. **Section is WIP**
 ## Testing
 **Section is WIP**
 ### Front-end
