@@ -2,7 +2,9 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "install": "lerna bootstrap",
     "dev": "cd packages/application && npm run dev",
+    "stub": "cd packages/stub && npm run start",
     "build": "cd packages/application && npm install && npm run generate"
   },
   "devDependencies": {
