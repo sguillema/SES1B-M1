@@ -17,7 +17,12 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js'],
+  modules: [
+    '@nuxtjs/pwa',
+  ],
+  plugins: [
+    '~/plugins/vuetify.js'
+  ],
   css: [
     '~/assets/style/app.styl'
   ],

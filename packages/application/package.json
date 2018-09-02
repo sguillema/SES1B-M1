@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/pwa": "^2.5.0",
     "axios": "^0.18.0",
     "nuxt": "^1.0.0",
     "vuetify": "^1.0.0"

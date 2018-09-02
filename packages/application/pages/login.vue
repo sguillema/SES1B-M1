@@ -1,11 +1,11 @@
 <template>
 	<v-layout column justify-center align-center fill-height>
-		<img src="../assets/cat.jpg" alt="This is a cat" class="mb-5 cat-image" />
+		<img src="../assets/cat.jpg" alt="This is a cat" class="cat-image" />
    		<div>
 			<v-form ref="form" v-model="valid" lazy-validation>
-				<v-text-field v-model="name" :rules="nameRules" :counter="10" label="Username" required></v-text-field>
+				<v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 				<v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
-				<v-btn :disabled="!valid" @click="submit" color="success" block to="/index">Login</v-btn>
+				<v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
         <nuxt-link class="register" to="/register">Register</nuxt-link>
 			</v-form>
 		</div>
@@ -19,10 +19,10 @@
     layout: 'blank',
     data: () => ({
       valid: false,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid'
       ],
       password: '',
       passwordRules: [
@@ -38,6 +38,9 @@
             name: this.name,
             password: this.password
           })
+          this.$router.push({
+            path: '/'
+          })
         }
       },
       clear () {
@@ -47,15 +50,18 @@
   }
 </script>
 
-<style>
+<style scoped>
 .cat-image{
   width: 150px;
+}
+.login-button{
+  margin-top: 10px;
 }
 .register{
   width: 100%;
   display: block;
   text-align: center;
-  margin: 30px 0px;
+  margin: 30px 0 10px 0;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.5);
 }

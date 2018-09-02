@@ -14,7 +14,8 @@ import {
   VTextField,
   VSelect,
   VCheckbox,
-  VBottomNav
+  VBottomNav,
+  VRadioGroup
 } from 'vuetify'
 // import Vuetify from 'vuetify'
 
@@ -33,7 +34,8 @@ Vue.use(Vuetify, {
     VTextField,
     VSelect,
     VCheckbox,
-    VBottomNav
+    VBottomNav,
+    VRadioGroup
   }
 })
 // Vue.use(Vuetify)
