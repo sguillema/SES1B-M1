@@ -1,3 +1,32 @@
 {
-    
+    "properties": {
+        "uid": {"type": "string"},
+        "created_at": {"type": "string"},
+        "user_id": {"type": "string"},
+        "doctor_id": {"type": "string"},
+        "status": {"type": "string"},
+        "content": {"type": "string"},
+        "location": {"type": "string"},
+        "heart_rate": {"type": "string"},
+        "video_url": {"type": "string"},
+        "documents": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "doc_name": {"type": "string"},
+                    "doc_type": {"type": "string"},
+                    "doc_url": {"type": "string"}
+                }
+            }
+        }
+    },
+    "required": [
+        "uid",
+        "created_at",
+        "user_id",
+        "doctor_id",
+        "status",
+        "content"
+    ]
 }

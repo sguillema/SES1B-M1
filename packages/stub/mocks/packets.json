@@ -1,3 +1,54 @@
-{
-    
-}
+[
+    {
+        "user_id": "1234",
+        "doctor_id": "0000",
+        "status": "pending",
+        "content": "I'm very sick!",
+        "location": "",
+        "heart_rate": "100",
+        "video_url": "www.youtube.com",
+        "documents": [
+            {
+                "doc_name": "My health record",
+                "doc_type": "text",
+                "doc_url": "url here"
+            }
+        ],
+        "doctor_comment": "",
+        "uid": "0000",
+        "created_at": "0000"
+    },
+    {
+        "user_id": "1234",
+        "doctor_id": "0001",
+        "status": "pending",
+        "content": "I'm not feeling so well Mr Stark....",
+        "location": "",
+        "heart_rate": "0",
+        "video_url": "",
+        "documents": [
+            {
+                "doc_name": "Picture of spiderman",
+                "doc_type": "image",
+                "doc_url": "url here"
+            }
+        ],
+        "doctor_comment": "",
+        "uid": "0001",
+        "created_at": "0000"
+    },
+    {
+        "user_id": "0000",
+        "doctor_id": "0000",
+        "status": "responded",
+        "content": "I think I'm dying.",
+        "location": "",
+        "heart_rate": "20",
+        "video_url": "",
+        "documents": [
+        ],
+        "doctor_comment": "You're very sick dude.",
+        "uid": "0002",
+        "created_at": "0000"
+    }
+]

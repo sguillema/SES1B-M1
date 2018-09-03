@@ -44,7 +44,7 @@ users.get('/users/:userId', async (req, res) => {
     if (user) {
         res.send(user)
     } else {
-        res.status(404).send("User could not be found")
+        res.status(404).send("User not be found")
     }
 })
 

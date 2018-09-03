@@ -13,13 +13,34 @@ const packetsSchema = require('../mocks/packets-schema')
 
 // GET -- Return all packets
 packets.get('/packets', (req, res) => {
-	res.send(data)
+	let userId = req.query.user || null
+	let doctorId = req.query.doctor || null
+
+	if (userId || doctorId) {
+		let packets = data.filter(item => {
+			if (userId && doctorId) {
+				return item.user_id == userId && item.doctor_id == doctorId
+			} else if (userId && !doctorId) {
+				return item.user_id == userId
+			} else if (!userId && doctorId) {
+				return item.doctor_id == doctorId
+			}
+		})
+
+		if (packets.length != 0) {
+			res.send(packets)
+		} else {
+			res.status(404).send("Packet not found")
+		}
+	} else {
+		res.send(data)
+	}
 })
 
 // POST -- Create a packet
 packets.post('/packets', (req, res) => {
 	req.body.uid = helpers.generateId()
-	req.body.created_ad = moment().format()
+	req.body.created_at = moment().format()
 	let valid = ajv.validate(packetsSchema, req.body)
 	
 	if (valid) {
@@ -30,7 +51,18 @@ packets.post('/packets', (req, res) => {
 	}
 })
 
-packets.get('/packets', (req, res) => res.send('Hello Packets!'))
+// GET -- Return a packet by id, return error if not found
+packets.get('/packets/:packetId', (req, res) => {
+	let packet = data.find(item => {
+		return req.params.packetId == item.uid
+	})
+
+	if (packet) {
+		res.send(packet)
+	} else {
+		res.status(404).send("Packet could not be found")
+	}
+})
 
 class Middleware {
     
