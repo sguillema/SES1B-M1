@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <v-container>
+      <v-container class="container">
         <nuxt />
       </v-container>
     </v-content>
@@ -59,3 +59,10 @@
     }
   }
 </script>
+
+</<style scoped>
+.container{
+  margin-bottom: 56px;
+}
+</style>
+

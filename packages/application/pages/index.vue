@@ -5,9 +5,9 @@
         <img src="/v.png" alt="Vuetify.js" class="mb-5" />
       </div> -->
       <v-card>
-        <v-card-title class="headline">Placeholder title</v-card-title>
+        <v-card-title class="headline">Welcome</v-card-title>
         <v-card-text>
-          <p>Welcome</p>
+          <p>This screen is a placeholder for now.</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
