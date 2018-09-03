@@ -11,7 +11,7 @@ const helpers = require('../helpers/helpers')
 let data = require('../mocks/packets')
 const packetsSchema = require('../mocks/packets-schema')
 
-// GET -- Return all packets
+// GET -- Return packets based on user or doctor query, otherwise return all
 packets.get('/packets', (req, res) => {
 	let userId = req.query.user || null
 	let doctorId = req.query.doctor || null
