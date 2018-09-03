@@ -17,6 +17,7 @@
 				label="Heart Rate (optional)"
 				required
 				></v-text-field>
+				<a style="font-size: 12px">Instructions on how to get your heart rate<br><br></a>
 				<v-textarea
 				name="content"
 				label="Message (optional)"
