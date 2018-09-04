@@ -16,6 +16,7 @@
 				<v-text-field
 				label="Heart Rate (optional)"
 				required
+				suffix="bpm"
 				></v-text-field>
 				<a style="font-size: 12px">Instructions on how to get your heart rate<br><br></a>
 				<v-textarea
