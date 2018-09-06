@@ -1,5 +1,6 @@
 const nodeExternals = require('webpack-node-externals')
 const resolve = (dir) => require('path').join(__dirname, dir)
+const dotenv = require('dotenv').config()
 
 module.exports = {
   /*
@@ -69,5 +70,10 @@ module.exports = {
         ]
       }
     }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    mapsAPiKey: process.env.MAPS_API_KEY || 'please set your api key'
+    
   }
 }
