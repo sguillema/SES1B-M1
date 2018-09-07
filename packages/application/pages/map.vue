@@ -11,8 +11,19 @@
       </blockquote> -->
       <v-card>
 			   <v-card-title>
-      <iframe width="100%" frameborder="0" style="border:0; height: calc(100vh - 126px)" src="https://www.google.com/maps/embed/v1/search?q=Hospitals%20near%20me&key=AIzaSyCUWJ1MyQgM59Y2x9HNehwyA0GFAi_qLPU" allowfullscreen></iframe> 
+      <iframe width="100%" frameborder="0" style="border:0; height: calc(100vh - 126px)" :src="src" allowfullscreen></iframe> 
 			   </v-card-title>
       </v-card>
   </v-layout>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      src: `https://www.google.com/maps/embed/v1/search?q=Hospitals%20near%20me&key=${process.env.mapsAPiKey}`
+    }
+  }
+}
+</script>
+

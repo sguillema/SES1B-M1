@@ -1,6 +1,6 @@
 const nodeExternals = require('webpack-node-externals')
 const resolve = (dir) => require('path').join(__dirname, dir)
-const dotenv = require('dotenv').config()
+require('dotenv').config()
 
 module.exports = {
   /*
