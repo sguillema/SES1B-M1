@@ -5,6 +5,7 @@ const Ajv = require('ajv')
 const ajv = new Ajv()
 
 const moment = require('moment')
+const crypto = require('crypto')
 
 const helpers = require('../helpers/helpers')
 
@@ -20,6 +21,13 @@ users.get('/users', async (req, res) => {
 users.post('/users', async (req, res) => {
     req.body.uid = helpers.generateId()
     req.body.created_at = moment().format()
+
+    let password =  middleware.setPassword(req.body.password)
+    req.body.password = password.hash
+    req.body.salt = password.salt
+
+    req.body.profile_id = helpers.getRandomInt(10, 99).toString()
+    console.log(req.body)
     let valid = ajv.validate(usersSchema, req.body)
     let existing = data.find(item => {
         return req.body.email == item.email
@@ -49,7 +57,21 @@ users.get('/users/:userId', async (req, res) => {
 })
 
 class Middleware {
-    
+    setPassword(password){
+        let salt = crypto.randomBytes(16).toString('hex')
+        let hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+        return {
+            salt: salt,
+            hash: hash
+        }
+    }
+
+    validatePassword(password, salt, hash){
+        const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+        return this.hash === hash
+    }
 }
+
+const middleware = new Middleware()
 
 module.exports = users

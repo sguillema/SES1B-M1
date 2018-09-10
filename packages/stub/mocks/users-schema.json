@@ -5,33 +5,14 @@
         "email": {"type": "string"},
         "password": {"type": "string"},
         "salt": {"type": "string"},
-        "first_name": {"type": "string"},
-        "last_name": {"type": "string"},
-        "sex": {"type": "string"},
-        "dob": {"type": "string"},
-        "weight": {"type": "string"},
-        "height": {"type": "string"},
-        "conditions": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "cond_name": {"type": "string"},
-                    "cond_notes": {"type": "string"}
-                }
-            }
-        }
+        "profile_id": {"type": "string"}
     },
     "required": [
         "uid",
         "created_at",
         "email",
-        "first_name",
-        "last_name",
-        "sex",
-        "dob",
-        "weight",
-        "height",
-        "conditions"
+        "password",
+        "salt",
+        "profile_id"
     ]
 }
