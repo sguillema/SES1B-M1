@@ -57,6 +57,12 @@ users.get('/users/:userId', async (req, res) => {
 })
 
 class Middleware {
+    /**
+     * Set a password. Returns a hash of that password and salt used for it.
+     * @param {string} password A string of the password we want to hash
+     * @returns {object} An object that contains a hash of the password and salt used for it.
+     * @memberof Middleware
+     */
     setPassword(password){
         let salt = crypto.randomBytes(16).toString('hex')
         let hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
@@ -66,6 +72,14 @@ class Middleware {
         }
     }
 
+    /**
+     * Validate a password using a string of a password, and checking it against a stored hash+salt.
+     * @param {string} password A string of the password we want to validate.
+     * @param {string} salt A string used to reverse-hash the hash to get the original password value.
+     * @param {string} hash A string that is a hash of the original password combined with salt.
+     * @returns {boolean} A boolean on whether the password provided is valid.
+     * @memberof Middleware
+     */
     validatePassword(password, salt, hash){
         const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
         return this.hash === hash
