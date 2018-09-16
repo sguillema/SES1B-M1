@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   data () {
     return {
       src: `https://www.google.com/maps/embed/v1/search?q=Hospitals%20near%20me&key=${process.env.mapsAPiKey}`

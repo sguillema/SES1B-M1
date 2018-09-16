@@ -11,7 +11,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt to="/login">Log out</v-btn>
+          <v-btn color="primary" flat @click="logout">Log out</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -19,7 +19,21 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
+
 export default {
+  middleware: 'authenticated',
+  methods: {
+    logout () {
+      this.$store.commit('clearAuth')
+      this.$store.commit('clearUserId')
+      Cookies.remove('auth')
+      Cookies.remove('userId')
+      this.$router.push({
+        path: '/login'
+      })
+    }
+  }
 }
 </script>
 

@@ -18,8 +18,6 @@ profiles.get('/profiles', async (req, res) => {
 
 // POST -- Create a profile, return error if already exists
 profiles.post('/profiles', async (req, res) => {
-    req.body.uid = helpers.generateId()
-    req.body.created_at = moment().format()
     let valid = ajv.validate(profilesSchema, req.body)
     let existing = data.find(item => {
         return req.body.email == item.email

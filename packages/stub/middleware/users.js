@@ -6,6 +6,7 @@ const ajv = new Ajv()
 
 const moment = require('moment')
 const crypto = require('crypto')
+const axios = require('axios')
 
 const helpers = require('../helpers/helpers')
 
@@ -19,23 +20,45 @@ users.get('/users', async (req, res) => {
 
 // POST -- Create a user, return error if already exists
 users.post('/users', async (req, res) => {
-    req.body.uid = helpers.generateId()
-    req.body.created_at = moment().format()
-
     let password =  auth.setPassword(req.body.password)
-    req.body.password = password.hash
-    req.body.salt = password.salt
 
-    req.body.profile_id = helpers.getRandomInt(10, 99).toString()
-    console.log(req.body)
-    let valid = ajv.validate(usersSchema, req.body)
+    let user = {
+        uid: helpers.generateId(),
+        created_at: moment().format(),
+        email: req.body.email,
+        password: password.hash,
+        salt: password.salt,
+        profile_id: null
+    }
+    let profile = {
+        uid: helpers.generateId(),
+        created_at: user.created_at,
+        email: req.body.email,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        sex: req.body.sex,
+        dob: req.body.dob,
+        weight: req.body.weight,
+        height: req.body.height,
+        conditions: req.body.conditions
+    } 
+
+    user.profile_id = profile.uid
+
+    let valid = ajv.validate(usersSchema, user)
     let existing = data.find(item => {
-        return req.body.email == item.email
+        return user.email == item.email
     })
 
     if (valid && !existing) {
-        data.push(req.body)
-        res.status(201).send("User has been created")
+        data.push(user)
+        axios.post(`http://localhost:4000/profiles`, profile)
+        .then(resolve => {
+            res.status(201).send("User has been created")
+        })
+        .catch(error => {
+            res.status(500).send(`${error}. An error has occurred trying to create an account`)
+        })
     } else if (valid && existing) {
         res.status(409).send("User with this email already exists")
     } else {
@@ -100,9 +123,9 @@ class Authentication {
      * @returns {boolean} A boolean on whether the password provided is valid.
      * @memberof Authentication
      */
-    validatePassword(password, salt, hash){
+    validatePassword(password, salt, hashIncoming){
         const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
-        return this.hash === hash
+        return hash === hashIncoming
     }
 }
 

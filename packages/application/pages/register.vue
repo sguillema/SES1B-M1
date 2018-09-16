@@ -37,6 +37,7 @@
   import axios from 'axios'
 
   export default {
+    middleware: 'notAuthenticated',
     layout: 'blank',
     data: () => ({
       step: 1,

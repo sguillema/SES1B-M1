@@ -14,8 +14,10 @@
 
 <script>
   import axios from 'axios'
+  import Cookies from 'js-cookie'
 
   export default {
+    middleware: 'notAuthenticated',
     layout: 'blank',
     data: () => ({
       valid: false,
@@ -27,20 +29,31 @@
       password: '',
       passwordRules: [
         v => !!v || 'Password is required'
-      ]
+      ],
+      showError: false,
+      errorMessage: ''
     }),
 
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
           // Native form submission is not yet supported
-          axios.post('/api/submit', {
-            name: this.name,
+          axios.post(`${process.env.apiUrl}/users/auth`, {
+            email: this.email,
             password: this.password
           })
-          this.$router.push({
-            path: '/'
-          })
+            .then(res => {
+              this.$store.commit('updateAuth', res.data.token)
+              this.$store.commit('updateUserId', res.data.uid)
+              Cookies.set('auth', res.data.token)
+              Cookies.set('userId', res.data.uid)
+              this.$router.push({
+                path: '/'
+              })
+            })
+            .catch(err => {
+              this.errorMessage = `${err}: Invalid credentials`
+            })
         }
       },
       clear () {

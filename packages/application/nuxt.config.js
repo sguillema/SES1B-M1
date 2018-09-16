@@ -73,6 +73,7 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    apiUrl: process.env.API_URL || 'http://localhost:4000',
     mapsAPiKey: process.env.MAPS_API_KEY || 'please set your api key'
     
   }
