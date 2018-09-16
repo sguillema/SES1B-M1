@@ -1,3 +1,18 @@
 [
-    
+    {
+        "uid": "01234",
+        "created_at": "0000",
+        "email": "john@example.com",
+        "password": "password",
+        "salt": "1234",
+        "profile_id": "0000"
+    },
+    {
+        "uid": "56789",
+        "created_at": "0000",
+        "email": "leroy@example.com",
+        "password": "password",
+        "salt": "1234",
+        "profile_id": "0000"
+    }
 ]
