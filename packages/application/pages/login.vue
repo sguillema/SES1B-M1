@@ -7,6 +7,7 @@
 				<v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
 				<v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
         <nuxt-link class="register" to="/register">Register</nuxt-link>
+        <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
 			</v-form>
 		</div>
   	</v-layout>
@@ -31,7 +32,7 @@
         v => !!v || 'Password is required'
       ],
       showError: false,
-      errorMessage: ''
+      errorMessage: 'Login Error'
     }),
 
     methods: {
@@ -53,6 +54,7 @@
             })
             .catch(err => {
               this.errorMessage = `${err}: Invalid credentials`
+              this.showError = true
             })
         }
       },
