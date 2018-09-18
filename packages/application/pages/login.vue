@@ -1,6 +1,6 @@
 <template>
 	<v-layout column justify-center align-center fill-height>
-		<img src="../assets/cat.jpg" alt="This is a cat" class="cat-image" />
+		<img src="../assets/doctor.jpg" alt="This is a doc" class="doc-image" />
    		<div>
 			<v-form ref="form" v-model="valid" lazy-validation>
 				<v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
@@ -64,8 +64,8 @@
 </script>
 
 <style scoped>
-.cat-image{
-  width: 150px;
+.doc-image{
+  width: 300px;
 }
 .login-button{
   margin-top: 10px;
