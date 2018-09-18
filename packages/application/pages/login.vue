@@ -67,7 +67,7 @@
 
 <style scoped>
 .doc-image{
-  width: 300px;
+  width: 150px;
 }
 .login-button{
   margin-top: 10px;
