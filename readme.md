@@ -88,3 +88,4 @@ ___
 * ExpressJS <https://expressjs.com/>
 * Application Deployment (CI/CD): Netlify - <https://www.netlify.com/> 
 * Project Management: Trello - <https://trello.com/>
+* Component Framework: vuetifyjs - <https://vuetifyjs.com/en/>
