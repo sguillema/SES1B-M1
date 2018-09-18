@@ -20,6 +20,7 @@
         <v-radio-group v-model="profile.sex" label="Sex">
           <v-radio :label="`Male`" :value="'Male'"></v-radio>
           <v-radio :label="`Female`" :value="'Female'"></v-radio>
+          <v-radio :label="`Other`" :value="'Other'"></v-radio>
         </v-radio-group>
 				<v-text-field v-model="profile.dob" :mask="dobMask" label="Date of Birth" placeholder="dd/mm/yyyy" required></v-text-field>
 				<v-text-field v-model="profile.weight" label="Weight" suffix="kg" placeholder="0" required></v-text-field>
