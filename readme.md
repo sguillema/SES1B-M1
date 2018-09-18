@@ -28,17 +28,40 @@ ___
    ```
 
 2. Navigate to the project folder and run
+    ```
+    npm install
+    ```
+    And once this is done, you can run
    ```
    npm run install
    ```
    *This will install all project dependencies and link them together*
+
+### Updating the repository
+1. In the root folder of the project, run
+    ```
+    git pull
+    ```
+    Then run
+    ```
+    npm run install
+    ```
+    *Please ensure that you are on the correct branch. You can see what branch you are on using the `git branch` command. You can change what branch you are on using the `git checkout <branchName>` command. Make sure to pull the latest version!*
 
 ### Running the Application for development
 Once you have successfully installed the project dependencies, you can run the following command from the project root directory to start the application
 ```
 npm run dev
 ```
-After this, make sure to run the stub server. Steps for it can be found below.
+After this, make sure to run the stub server. Steps for it can be found in the [Running the Stub server for development](#running-the-stub-server-for-development) section below.
+
+You can access the running application through `localhost:3000`. 
+
+For local development, you can login to the app as a patient using `john@example.com` as the email, and `password` as the password. 
+
+You can login as a doctor using `NOT SET UP YET` as the email, and `NOT SET UP YET` as the password.
+
+*Note: This is just for local development.*
 
 ### Running the Stub server for development
 For development, the application will use a stub server to handle API requests. In the project root directory, run the following command to start the server
