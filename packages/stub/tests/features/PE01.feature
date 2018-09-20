@@ -1,4 +1,5 @@
 # PE01 Patient Login
+@PE01
 Feature: Simple maths
   In order to do maths
   As a developer
@@ -17,5 +18,5 @@ Feature: Simple maths
     Examples:
       | var | increment | result |
       | 100 |         5 |    105 |
-      |  99 |      1234 |   1333 |
-      |  12 |         5 |     17 |
+      # |  99 |      1234 |   1333 |
+      # |  12 |         5 |     17 |
