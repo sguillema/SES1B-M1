@@ -26,9 +26,9 @@ export default {
   methods: {
     logout () {
       this.$store.commit('clearAuth')
-      this.$store.commit('clearUserId')
+      this.$store.commit('clearUser')
       Cookies.remove('auth')
-      Cookies.remove('userId')
+      Cookies.remove('user')
       this.$router.push({
         path: '/login'
       })

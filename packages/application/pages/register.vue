@@ -74,6 +74,7 @@
           axios.post('http://localhost:4000/users', {
             email: this.profile.email,
             password: this.profile.password,
+            type: 'patient',
             first_name: this.profile.firstName,
             last_name: this.profile.lastName,
             sex: this.profile.sex,

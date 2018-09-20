@@ -5,38 +5,23 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-bottom-nav
-      :active.sync="bottomNav"
-      :value="true"
-      fixed
-      color="white"
-    >
-      <v-btn
-        color="teal"
-        flat
-        value="recent"
-        to="/"
-      >
+    <v-bottom-nav :active.sync="bottomNav" :value="true" fixed color="white">
+      <v-btn color="blue" flat value="home" to="/">
         <span>Home</span>
-        <v-icon>history</v-icon>
+        <v-icon>home</v-icon>
       </v-btn>
 
-      <v-btn
-        color="teal"
-        flat
-        value="favorites"
-        to="/packet"
-      >
-        <span>Packet</span>
+      <v-btn color="blue" flat value="favorites" to="/packet">
+        <span>Packets</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn
-        color="teal"
-        flat
-        value="nearby"
-        to="/map"
-      >
+      <v-btn color="blue" flat value="patients" to="/patients" v-if="userType === 'doctor'">
+        <span>Patients</span>
+        <v-icon>people</v-icon>
+      </v-btn>
+
+      <v-btn color="blue" flat value="map" to="/map">
         <span>Map</span>
         <v-icon>place</v-icon>
       </v-btn>
@@ -54,7 +39,8 @@
           { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
         ],
         title: 'SES1B',
-        bottomNav: 'recent'
+        bottomNav: 'recent',
+        userType: this.$store.state.userType
       }
     }
   }

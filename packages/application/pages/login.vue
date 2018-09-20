@@ -45,9 +45,10 @@
           })
             .then(res => {
               this.$store.commit('updateAuth', res.data.token)
-              this.$store.commit('updateUserId', res.data.uid)
+              this.$store.commit('updateUserId', res.data.user.uid)
+              this.$store.commit('updateUserType', res.data.user.type)
               Cookies.set('auth', res.data.token)
-              Cookies.set('userId', res.data.uid)
+              Cookies.set('user', res.data.user)
               this.$router.push({
                 path: '/'
               })
