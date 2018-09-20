@@ -8,6 +8,7 @@ This is the repository for SES1B's Patient-Doctor application assignment.
     - [Table of Contents](#table-of-contents)
     - [Environment Dependencies](#environment-dependencies)
     - [Installation & Setup](#installation--setup)
+        - [Updating the repository](#updating-the-repository)
         - [Running the Application for development](#running-the-application-for-development)
         - [Running the Stub server for development](#running-the-stub-server-for-development)
     - [Back-end Development](#back-end-development)
@@ -59,7 +60,7 @@ You can access the running application through `localhost:3000`.
 
 For local development, you can login to the app as a patient using `john@example.com` as the email, and `password` as the password. 
 
-You can login as a doctor using `NOT SET UP YET` as the email, and `NOT SET UP YET` as the password.
+You can login as a doctor using `jane@example.com` as the email, and `password` as the password.
 
 *Note: This is just for local development.*
 
@@ -82,10 +83,10 @@ ___
 ## Resources
 * IDE: Visual Studio Code - <https://code.visualstudio.com/>
 * Application Framework: Nuxt - <https://nuxtjs.org/>
+* UI Component Framework: Vuetify - <https://vuetifyjs.com/en/>
 * Testing Framework: Jest - <https://jestjs.io/>
 * MongoDB using MLab (DB as a Service) - <https://mlab.com/>
 * AWS Lambda using ClaudiaJS <https://claudiajs.com/>
 * ExpressJS <https://expressjs.com/>
 * Application Deployment (CI/CD): Netlify - <https://www.netlify.com/> 
 * Project Management: Trello - <https://trello.com/>
-* Component Framework: vuetifyjs - <https://vuetifyjs.com/en/>
