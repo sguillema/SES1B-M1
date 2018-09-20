@@ -20,6 +20,9 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/toast',
   ],
   plugins: [
     '~/plugins/vuetify.js'
