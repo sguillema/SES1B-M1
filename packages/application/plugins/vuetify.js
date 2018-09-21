@@ -17,7 +17,8 @@ import {
   VBottomNav,
   VRadioGroup,
   VTextarea,
-  VAlert
+  VAlert,
+  VDialog
 } from 'vuetify'
 // import Vuetify from 'vuetify'
 
@@ -39,7 +40,8 @@ Vue.use(Vuetify, {
     VBottomNav,
     VRadioGroup,
     VTextarea,
-    VAlert
+    VAlert,
+    VDialog
   }
 })
 // Vue.use(Vuetify)

@@ -21,6 +21,10 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
   ],
+  vendor: [
+    'axios',
+    'js-cookie'
+  ],
   plugins: [
     '~/plugins/vuetify.js'
   ],
