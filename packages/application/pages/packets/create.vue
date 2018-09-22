@@ -83,6 +83,10 @@
       clear () {
         this.$refs.form.reset()
       }
+    },
+
+    fetch ({store}) {
+      store.commit('updatePageTitle', 'Create Packet')
     }
   }
 </script>
