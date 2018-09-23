@@ -33,6 +33,9 @@ export default {
         path: '/login'
       })
     }
+  },
+  fetch ({store}) {
+    store.commit('updatePageTitle', 'Home')
   }
 }
 </script>

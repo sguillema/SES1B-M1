@@ -4,7 +4,9 @@ var cookieparser = require('cookieparser')
 export const state = () => ({
   auth: null,
   userId: null,
-  userType: null
+  userType: null,
+  pageTitle: null,
+  userPackets: []
 })
 
 export const mutations = {
@@ -16,6 +18,12 @@ export const mutations = {
   },
   updateUserType (state, data) {
     state.userType = data
+  },
+  updatePageTitle (state, data) {
+    state.pageTitle = data
+  },
+  updatePackets (state, data) {
+    state.userPackets = data
   },
   clearAuth (state) {
     state.auth = null

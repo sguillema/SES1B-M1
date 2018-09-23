@@ -24,6 +24,9 @@ export default {
     return {
       src: `https://www.google.com/maps/embed/v1/search?q=Hospitals%20near%20me&key=${process.env.mapsAPiKey}`
     }
+  },
+  fetch ({store}) {
+    store.commit('updatePageTitle', 'Map')
   }
 }
 </script>
