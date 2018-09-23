@@ -5,7 +5,8 @@ export const state = () => ({
   auth: null,
   userId: null,
   userType: null,
-  pageTitle: null
+  pageTitle: null,
+  userPackets: []
 })
 
 export const mutations = {
@@ -20,6 +21,9 @@ export const mutations = {
   },
   updatePageTitle (state, data) {
     state.pageTitle = data
+  },
+  updatePackets (state, data) {
+    state.userPackets = data
   },
   clearAuth (state) {
     state.auth = null
