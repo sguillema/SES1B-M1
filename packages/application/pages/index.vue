@@ -11,7 +11,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat @click="logout">Log out</v-btn>
+          <v-btn color="primary" flat @click="logout()">Log out</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -25,8 +25,9 @@ export default {
   middleware: 'authenticated',
   methods: {
     logout () {
-      this.$store.commit('clearAuth')
-      this.$store.commit('clearUser')
+      this.$store.commit('clearAppState')
+      // this.$store.commit('clearAuth')
+      // this.$store.commit('clearUser')
       Cookies.remove('auth')
       Cookies.remove('user')
       this.$router.push({

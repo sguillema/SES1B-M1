@@ -31,6 +31,11 @@ export const mutations = {
   clearUser (state) {
     state.userId = null
     state.userType = null
+  },
+  clearAppState (state) {
+    Object.keys(state).forEach(key => {
+      state[key] = null
+    })
   }
 }
 

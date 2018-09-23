@@ -21,7 +21,7 @@
         <v-icon>favorite</v-icon>
       </v-btn>
 
-      <v-btn color="blue" flat value="patients" to="/patients" v-if="this.$store.state.userType === 'doctor'">
+      <v-btn color="blue" flat value="patients" to="/patients" v-if="userType === 'doctor'">
         <span>Patients</span>
         <v-icon>people</v-icon>
       </v-btn>
@@ -44,7 +44,8 @@
           { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
         ],
         title: 'SES1B',
-        bottomNav: 'recent'
+        bottomNav: 'recent',
+        userType: this.$store.state.userType
       }
     }
   }

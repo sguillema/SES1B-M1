@@ -51,7 +51,7 @@
       store.commit('updatePageTitle', 'Packets')
     },
     mounted () {
-      if (this.$store.state.userPackets.length === 0) {
+      if (this.$store.state.userPackets == null) {
         switch (this.$store.state.userType.toLowerCase()) {
           case 'doctor':
             axios.get(`${process.env.apiUrl}/packets?doctor=${this.$store.state.userId}`)
