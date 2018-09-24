@@ -28,7 +28,8 @@ users.post('/users', async (req, res) => {
         email: req.body.email,
         password: password.hash,
         salt: password.salt,
-        profile_id: null
+        profile_id: null,
+        type: req.body.type
     }
     let profile = {
         uid: helpers.generateId(),
@@ -91,7 +92,10 @@ users.post('/users/auth', async (req, res) => {
     if (user && auth.validatePassword(incomingPassword, user.salt, user.password)) {
         // Placeholder token implementation
         res.send({
-            uid: user.uid,
+            user: {
+                uid: user.uid,
+                type: user.type
+            },
             token: "supersecret"
         })
     } else {

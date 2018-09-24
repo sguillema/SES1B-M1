@@ -7,6 +7,7 @@
 				<v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
 				<v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
         <nuxt-link class="register" to="/register">Register</nuxt-link>
+        <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
 			</v-form>
 		</div>
   	</v-layout>
@@ -31,7 +32,7 @@
         v => !!v || 'Password is required'
       ],
       showError: false,
-      errorMessage: ''
+      errorMessage: 'Login Error'
     }),
 
     methods: {
@@ -44,15 +45,17 @@
           })
             .then(res => {
               this.$store.commit('updateAuth', res.data.token)
-              this.$store.commit('updateUserId', res.data.uid)
+              this.$store.commit('updateUserId', res.data.user.uid)
+              this.$store.commit('updateUserType', res.data.user.type)
               Cookies.set('auth', res.data.token)
-              Cookies.set('userId', res.data.uid)
+              Cookies.set('user', res.data.user)
               this.$router.push({
                 path: '/'
               })
             })
             .catch(err => {
               this.errorMessage = `${err}: Invalid credentials`
+              this.showError = true
             })
         }
       },
@@ -65,7 +68,7 @@
 
 <style scoped>
 .doc-image{
-  width: 300px;
+  width: 150px;
 }
 .login-button{
   margin-top: 10px;

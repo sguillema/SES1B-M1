@@ -41,6 +41,7 @@ packets.get('/packets', (req, res) => {
 packets.post('/packets', (req, res) => {
 	req.body.uid = helpers.generateId()
 	req.body.created_at = moment().format()
+	req.body.status = 'pending'
 	let valid = ajv.validate(packetsSchema, req.body)
 	
 	if (valid) {
