@@ -51,22 +51,22 @@
       store.commit('updatePageTitle', 'Packets')
     },
     mounted () {
-      if (this.$store.state.userPackets == null) {
-        switch (this.$store.state.userType.toLowerCase()) {
-          case 'doctor':
-            axios.get(`${process.env.apiUrl}/packets?doctor=${this.$store.state.userId}`)
-              .then(res => {
-                this.$store.commit('updatePackets', res.data)
-              })
-            break
-          case 'patient':
-            axios.get(`${process.env.apiUrl}/packets?user=${this.$store.state.userId}`)
-              .then(res => {
-                this.$store.commit('updatePackets', res.data)
-              })
-            break
-        }
+      // if (this.$store.state.userPackets == null) {
+      switch (this.$store.state.userType.toLowerCase()) {
+        case 'doctor':
+          axios.get(`${process.env.apiUrl}/packets?doctor=${this.$store.state.userId}`)
+            .then(res => {
+              this.$store.commit('updatePackets', res.data)
+            })
+          break
+        case 'patient':
+          axios.get(`${process.env.apiUrl}/packets?user=${this.$store.state.userId}`)
+            .then(res => {
+              this.$store.commit('updatePackets', res.data)
+            })
+          break
       }
+      // }
     }
   }
 </script>
