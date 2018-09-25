@@ -56,7 +56,7 @@ npm run dev
 ```
 After this, make sure to run the stub server. Steps for it can be found in the [Running the Stub server for development](#running-the-stub-server-for-development) section below.
 
-You can access the running application through `localhost:3000`. 
+You can access the running application through `localhost:3333`. 
 
 For local development, you can login to the app as a patient using `john@example.com` as the email, and `password` as the password. 
 
