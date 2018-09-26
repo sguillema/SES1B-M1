@@ -16,6 +16,7 @@
 <script>
   import axios from 'axios'
   import Cookies from 'js-cookie'
+  import moment from 'moment'
 
   export default {
     middleware: 'notAuthenticated',
@@ -47,8 +48,13 @@
               this.$store.commit('updateAuth', res.data.token)
               this.$store.commit('updateUserId', res.data.user.uid)
               this.$store.commit('updateUserType', res.data.user.type)
-              Cookies.set('auth', res.data.token)
-              Cookies.set('user', res.data.user)
+              let oneHour = moment().add(1, 'hours').toDate()
+              Cookies.set('auth', res.data.token, {
+                expires: oneHour
+              })
+              Cookies.set('user', res.data.user, {
+                expires: oneHour
+              })
               this.$router.push({
                 path: '/'
               })
