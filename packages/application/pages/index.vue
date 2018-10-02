@@ -9,6 +9,24 @@
         <v-card-text>
           <p>This screen is a placeholder for now.</p>
         </v-card-text>
+        <v-container fluid>
+    <v-layout row wrap align-center>
+      <v-flex xs6>
+        <v-subheader>Avaliable Doctors</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          :items="states"
+          v-model="e1"
+          menu-props="auto"
+          label="Select"
+          hide-details
+          prepend-icon="map"
+          single-line
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" flat @click="logout()">Log out</v-btn>
