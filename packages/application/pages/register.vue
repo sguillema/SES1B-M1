@@ -12,20 +12,18 @@
       </v-layout>
 			</v-form>
 		</div>
-    <div v-if="step == 3">
+    <div v-if="step == 2">
          <h1>What would you like to register as?</h1>
 			<v-form ref="form" v-model="valid" lazy-validation>
-				<v-radio-group v-model="profile.type" label="Doctor or Patient" required>
-          <v-radio :label="`Doctor`" :value="'Doctor'"></v-radio>
-          <v-radio :label="`Patient`" :value="'Patient'"></v-radio>
-        </v-radio-group>
+      <v-card>
       <v-layout row justify-space-between align-center>
-        <nuxt-link class="back" to="/login">Back</nuxt-link>
-				<v-btn :disabled="!valid" @click="incrementStep" color="success">Next</v-btn>
+        <v-btn @click="incrementStep2" color="success">Doctor</v-btn>
+				<v-btn :disabled="!valid" @click="incrementStep" color="success">Patient</v-btn>
       </v-layout>
+      </v-card>
 			</v-form>
 		</div>
-   		<div v-else-if="step == 2">
+   		<div v-else-if="step == 3">
          <h1>Patient Profile Details</h1>
 			<v-form ref="form" v-model="valid2" lazy-validation>
 				<v-text-field v-model="profile.firstName" label="First Name" placeholder="Naruto" required></v-text-field>
@@ -46,7 +44,7 @@
 		</div>
     <div v-else-if="step == 4">
          <h1>Doctor Profile Details</h1>
-			<v-form ref="form" v-model="valid2" lazy-validation>
+			<v-form ref="form" v-model="valid3" lazy-validation>
 				<v-text-field v-model="profile.firstName" label="First Name" placeholder="Naruto" required></v-text-field>
 				<v-text-field v-model="profile.lastName" label="Last Name" placeholder="Uzamaki" required></v-text-field>
         <v-radio-group v-model="profile.sex" label="Sex">
@@ -55,10 +53,9 @@
           <v-radio :label="`Other`" :value="'Other'"></v-radio>
         </v-radio-group>
 				<v-text-field v-model="profile.dob" :mask="dobMask" label="Date of Birth" placeholder="dd/mm/yyyy" required></v-text-field>
-        <v-text-field v-model="profile.dob" label="Place of Employment" placeholder="E.g. Bob Medical Centres" required></v-text-field>
       <v-layout row justify-space-between align-center>
-        <a class="back" @click="step--">Back</a>
-				<v-btn :disabled="!valid2" @click="submit" color="success" to="/index">Finish</v-btn>
+        <a class="back" @click="DecrementStep">Back</a>
+				<v-btn :disabled="!valid3" @click="submit" color="success" to="/index">Finish</v-btn>
       </v-layout>
 			</v-form>
 		</div>
@@ -150,6 +147,20 @@
         this.$refs.form.validate()
         if (this.valid) {
           this.step++
+        }
+      },
+      incrementStep2 () {
+        this.$refs.form.validate()
+        if (this.valid) {
+          this.step++
+          this.step++
+        }
+      },
+      DecrementStep () {
+        this.$refs.form.validate()
+        if (this.valid) {
+          this.step--
+          this.step--
         }
       }
     }
