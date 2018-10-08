@@ -11,7 +11,7 @@ const helpers = require('../helpers/helpers')
 let data = require('../mocks/pairs')
 const pairsSchema = require('../mocks/pairs-schema')
 
-// GET -- Return all pairs
+// GET -- Return pairs based on patient or doctor query, otherwise return all
 pairs.get('/pairs', async (req, res) => {
     let patientId = req.query.user || null
     let doctorId = req.query.doctor || null
