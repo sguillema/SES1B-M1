@@ -47,11 +47,6 @@
 			<v-form ref="form" v-model="valid3" lazy-validation>
 				<v-text-field v-model="profile.firstName" label="First Name" placeholder="Naruto" required></v-text-field>
 				<v-text-field v-model="profile.lastName" label="Last Name" placeholder="Uzamaki" required></v-text-field>
-        <v-radio-group v-model="profile.sex" label="Sex">
-          <v-radio :label="`Male`" :value="'Male'"></v-radio>
-          <v-radio :label="`Female`" :value="'Female'"></v-radio>
-          <v-radio :label="`Other`" :value="'Other'"></v-radio>
-        </v-radio-group>
 				<v-text-field v-model="profile.dob" :mask="dobMask" label="Date of Birth" placeholder="dd/mm/yyyy" required></v-text-field>
       <v-layout row justify-space-between align-center>
         <a class="back" @click="DecrementStep">Back</a>
@@ -130,9 +125,7 @@
             type: 'doctor',
             first_name: this.profile.firstName,
             last_name: this.profile.lastName,
-            sex: this.profile.sex,
-            dob: this.profile.dob,
-            conditions: []
+            dob: this.profile.dob
           }).then(res => {
             console.log(res)
             this.$router.push({
