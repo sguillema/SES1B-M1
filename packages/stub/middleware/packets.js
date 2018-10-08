@@ -13,16 +13,16 @@ const packetsSchema = require('../mocks/packets-schema')
 
 // GET -- Return packets based on user or doctor query, otherwise return all
 packets.get('/packets', (req, res) => {
-	let userId = req.query.user || null
+	let patientId = req.query.user || null
 	let doctorId = req.query.doctor || null
 
-	if (userId || doctorId) {
+	if (patientId || doctorId) {
 		let packets = data.filter(item => {
-			if (userId && doctorId) {
-				return item.user_id == userId && item.doctor_id == doctorId
-			} else if (userId && !doctorId) {
-				return item.user_id == userId
-			} else if (!userId && doctorId) {
+			if (patientId && doctorId) {
+				return item.user_id == patientId && item.doctor_id == doctorId
+			} else if (patientId && !doctorId) {
+				return item.user_id == patientId
+			} else if (!patientId && doctorId) {
 				return item.doctor_id == doctorId
 			}
 		})
