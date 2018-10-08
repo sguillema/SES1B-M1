@@ -26,15 +26,15 @@ pairs.get('/pairs', async (req, res) => {
                 return item.doctor_id == doctorId
             }
         })
-    }
 
-    if (pairs.length != 0) {
-        res.send(pairs)
+        if (pairs.length != 0) {
+            res.send(pairs)
+        } else {
+            res.status(404).sent("Pair not found")
+        }
     } else {
-        res.status(404).sent("Pair not found")
+        res.send(data)
     }
-
-    res.send(data)
 })
 
 // POST -- Create a pair, return error if already exists
