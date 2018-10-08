@@ -13,6 +13,27 @@ const pairsSchema = require('../mocks/pairs-schema')
 
 // GET -- Return all pairs
 pairs.get('/pairs', async (req, res) => {
+    let patientId = req.query.user || null
+    let doctorId = req.query.doctor || null
+    
+    if (patientId || doctorId) {
+        let pairs = data.filter(item => {
+            if (patientId && doctorId) {
+                return item.user_id == patientId && item.doctor_id == doctorId
+            } else if (patientId && !doctorId) {
+                return item.user_id == patientId
+            } else if (!patientId && doctorId) {
+                return item.doctor_id == doctorId
+            }
+        })
+    }
+
+    if (pairs.length != 0) {
+        res.send(pairs)
+    } else {
+        res.status(404).sent("Pair not found")
+    }
+
     res.send(data)
 })
 
