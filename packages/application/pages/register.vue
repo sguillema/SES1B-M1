@@ -38,7 +38,7 @@
 				<v-text-field v-model="profile.height" label="Height" suffix="cm" placeholder="0" required></v-text-field>
       <v-layout row justify-space-between align-center>
         <a class="back" @click="step--">Back</a>
-				<v-btn :disabled="!valid2" @click="submit" color="success" to="/index">Finish</v-btn>
+				<v-btn :disabled="!valid2" @click="submit" color="success">Finish</v-btn>
       </v-layout>
 			</v-form>
 		</div>
@@ -50,7 +50,7 @@
 				<v-text-field v-model="profile.dob" :mask="dobMask" label="Date of Birth" placeholder="dd/mm/yyyy" required></v-text-field>
       <v-layout row justify-space-between align-center>
         <a class="back" @click="DecrementStep">Back</a>
-				<v-btn :disabled="!valid3" @click="submit" color="success" to="/index">Finish</v-btn>
+				<v-btn :disabled="!valid3" @click="submit2" color="success">Finish</v-btn>
       </v-layout>
 			</v-form>
 		</div>
@@ -67,6 +67,7 @@
       step: 1,
       valid: false,
       valid2: false,
+      valid3: false,
       profile: {
         email: '',
         password: '',
@@ -117,15 +118,14 @@
       },
       submit2 () {
         this.$refs.form.validate()
-        if (this.valid2) {
+        if (this.valid3) {
           // Native form submission is not yet supported
           axios.post('http://localhost:4000/users', {
             email: this.profile.email,
             password: this.profile.password,
             type: 'doctor',
             first_name: this.profile.firstName,
-            last_name: this.profile.lastName,
-            dob: this.profile.dob
+            last_name: this.profile.lastName
           }).then(res => {
             console.log(res)
             this.$router.push({

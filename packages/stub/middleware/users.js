@@ -32,7 +32,7 @@ users.post('/users', async (req, res) => {
         type: req.body.type
     }
     let profile = {}
-    if (user.type.toLowercase() == "patient") {
+    if (user.type.toLowerCase() == "patient") {
         profile = {
             uid: helpers.generateId(),
             created_at: user.created_at,
@@ -46,7 +46,7 @@ users.post('/users', async (req, res) => {
             conditions: req.body.conditions
         }
     }
-    else if (user.type.toLowercase() == "doctor") {
+    else if (user.type.toLowerCase() == "doctor") {
         profile = {
             uid: helpers.generateId(),
             created_at: user.created_at,
@@ -65,16 +65,16 @@ users.post('/users', async (req, res) => {
 
     if (valid && !existing) {
         data.push(user)
-        if (user.type.toLowercase() == "patient") {
-            axios.post(`http://localhost:4000/patients`, patient)
+        if (user.type.toLowerCase() == "patient") {
+            axios.post(`http://localhost:4000/patients`, profile)
             .then(resolve => {
                 res.status(201).send("User has been created")
             })
             .catch(error => {
                 res.status(500).send(`${error}. An error has occurred trying to create an account`)
             })
-        } else if (user.type.toLowercase() == "doctor") {
-            axios.post(`http://localhost:4000/doctors`, doctor)
+        } else if (user.type.toLowerCase() == "doctor") {
+            axios.post(`http://localhost:4000/doctors`, profile)
             .then(resolve => {
                 res.status(201).send("User has been created")
             })
