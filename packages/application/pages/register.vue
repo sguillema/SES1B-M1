@@ -12,8 +12,19 @@
       </v-layout>
 			</v-form>
 		</div>
-   		<div v-else-if="step == 2">
-         <h1>Profile Details</h1>
+    <div v-if="step == 2">
+         <h1>What would you like to register as?</h1>
+			<v-form ref="form" v-model="valid" lazy-validation>
+      <v-card>
+      <v-layout row justify-space-between align-center>
+        <v-btn @click="incrementStep2" color="success">Doctor</v-btn>
+				<v-btn :disabled="!valid" @click="incrementStep" color="success">Patient</v-btn>
+      </v-layout>
+      </v-card>
+			</v-form>
+		</div>
+   		<div v-else-if="step == 3">
+         <h1>Patient Profile Details</h1>
 			<v-form ref="form" v-model="valid2" lazy-validation>
 				<v-text-field v-model="profile.firstName" label="First Name" placeholder="Naruto" required></v-text-field>
 				<v-text-field v-model="profile.lastName" label="Last Name" placeholder="Uzamaki" required></v-text-field>
@@ -28,6 +39,18 @@
       <v-layout row justify-space-between align-center>
         <a class="back" @click="step--">Back</a>
 				<v-btn :disabled="!valid2" @click="submit" color="success" to="/index">Finish</v-btn>
+      </v-layout>
+			</v-form>
+		</div>
+    <div v-else-if="step == 4">
+         <h1>Doctor Profile Details</h1>
+			<v-form ref="form" v-model="valid3" lazy-validation>
+				<v-text-field v-model="profile.firstName" label="First Name" placeholder="Naruto" required></v-text-field>
+				<v-text-field v-model="profile.lastName" label="Last Name" placeholder="Uzamaki" required></v-text-field>
+				<v-text-field v-model="profile.dob" :mask="dobMask" label="Date of Birth" placeholder="dd/mm/yyyy" required></v-text-field>
+      <v-layout row justify-space-between align-center>
+        <a class="back" @click="DecrementStep">Back</a>
+				<v-btn :disabled="!valid3" @click="submit" color="success" to="/index">Finish</v-btn>
       </v-layout>
 			</v-form>
 		</div>
@@ -92,10 +115,45 @@
           })
         }
       },
+      submit2 () {
+        this.$refs.form.validate()
+        if (this.valid2) {
+          // Native form submission is not yet supported
+          axios.post('http://localhost:4000/users', {
+            email: this.profile.email,
+            password: this.profile.password,
+            type: 'doctor',
+            first_name: this.profile.firstName,
+            last_name: this.profile.lastName,
+            dob: this.profile.dob
+          }).then(res => {
+            console.log(res)
+            this.$router.push({
+              path: '/'
+            })
+          }).catch(err => {
+            console.log(err)
+          })
+        }
+      },
       incrementStep () {
         this.$refs.form.validate()
         if (this.valid) {
           this.step++
+        }
+      },
+      incrementStep2 () {
+        this.$refs.form.validate()
+        if (this.valid) {
+          this.step++
+          this.step++
+        }
+      },
+      DecrementStep () {
+        this.$refs.form.validate()
+        if (this.valid) {
+          this.step--
+          this.step--
         }
       }
     }
