@@ -31,18 +31,30 @@ users.post('/users', async (req, res) => {
         profile_id: null,
         type: req.body.type
     }
-    let profile = {
-        uid: helpers.generateId(),
-        created_at: user.created_at,
-        email: req.body.email,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        sex: req.body.sex,
-        dob: req.body.dob,
-        weight: req.body.weight,
-        height: req.body.height,
-        conditions: req.body.conditions
-    } 
+    let profile = {}
+    if (user.type.toLowercase() == "patient") {
+        profile = {
+            uid: helpers.generateId(),
+            created_at: user.created_at,
+            email: req.body.email,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            sex: req.body.sex,
+            dob: req.body.dob,
+            weight: req.body.weight,
+            height: req.body.height,
+            conditions: req.body.conditions
+        }
+    }
+    else if (user.type.toLowercase() == "doctor") {
+        profile = {
+            uid: helpers.generateId(),
+            created_at: user.created_at,
+            email: req.body.email,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name
+        }
+    }
 
     user.profile_id = profile.uid
 
@@ -53,13 +65,23 @@ users.post('/users', async (req, res) => {
 
     if (valid && !existing) {
         data.push(user)
-        axios.post(`http://localhost:4000/profiles`, profile)
-        .then(resolve => {
-            res.status(201).send("User has been created")
-        })
-        .catch(error => {
-            res.status(500).send(`${error}. An error has occurred trying to create an account`)
-        })
+        if (user.type.toLowercase() == "patient") {
+            axios.post(`http://localhost:4000/patients`, patient)
+            .then(resolve => {
+                res.status(201).send("User has been created")
+            })
+            .catch(error => {
+                res.status(500).send(`${error}. An error has occurred trying to create an account`)
+            })
+        } else if (user.type.toLowercase() == "doctor") {
+            axios.post(`http://localhost:4000/doctors`, doctor)
+            .then(resolve => {
+                res.status(201).send("User has been created")
+            })
+            .catch(error => {
+                res.status(500).send(`${error}. An error has occurred trying to create an account`)
+            })
+        }
     } else if (valid && existing) {
         res.status(409).send("User with this email already exists")
     } else {

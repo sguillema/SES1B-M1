@@ -6,14 +6,16 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const users = require('./middleware/users')
-const profiles = require('./middleware/profiles')
+const doctors = require('./middleware/doctors')
+const patients = require('./middleware/patients')
 const packets = require('./middleware/packets')
 
 app.use(
     bodyParser.json(), 
     cors(),
     users, 
-    profiles, 
+    doctors,
+    patients, 
     packets
 )
 

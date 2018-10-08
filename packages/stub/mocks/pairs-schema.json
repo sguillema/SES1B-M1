@@ -1,0 +1,12 @@
+{
+    "properties": {
+        "uid": {"type": "string"},
+        "doctor_id": {"type": "string"},
+        "patient_id": {"type": "string"}
+    },
+    "required": [
+        "uid",
+        "doctor_id",
+        "patient_id"
+    ]
+}

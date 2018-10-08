@@ -1,0 +1,32 @@
+[
+    {
+        "email": "john@example.com",
+        "first_name": "John",
+        "last_name": "Smith",
+        "sex": "Male",
+        "dob": "1/1/80",
+        "weight": "90.5",
+        "height": "170.2",
+        "conditions": [
+            {
+                "cond_name": "Lactose Intolerance",
+                "cond_notes": "Developed after age 6"
+            }
+        ],
+        "uid": "1234",
+        "created_at": "2018-09-17T00:11:14+10:00"
+    },
+    {
+        "email": "leroy@example.com",
+        "first_name": "Leroy",
+        "last_name": "Jenkins",
+        "sex": "Male",
+        "dob": "1/1/90",
+        "weight": "75.4",
+        "height": "173.4",
+        "conditions": [
+        ],
+        "uid": "5678",
+        "created_at": "0000"
+    }
+]
