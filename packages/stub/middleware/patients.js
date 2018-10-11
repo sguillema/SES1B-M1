@@ -11,18 +11,34 @@ const helpers = require('../helpers/helpers')
 let data = require('../mocks/patients')
 const patientsSchema = require('../mocks/patients-schema')
 
-// GET -- Return patients based on search query. Query must be minimum 3 characters, otherwise return none. If no query provided, return all
+// GET -- Return patients based on search query. Query must be minimum 3 characters, otherwise return none. OR return patients based on ids (preferable to use /:patientId endpoint for single patient). If no query or ids provided, return all
 patients.get('/patients', async (req, res) => {
-    let query = req.query.search.toLowerCase() || null
-    if (query && query.length < 3) {
-        query = null
+    let idsQuery = req.query.ids || null
+    let searchQuery = req.query.search || null
+    let ids = null
+    let query = null
+
+    if (idsQuery) ids = idsQuery.split(',')
+    if (searchQuery) {
+        query = searchQuery.toLowerCase()
+        if (query && query.length < 3) {
+            query = null
+        }
     }
 
     let results = null
-    if (query) {
+    if (query && !ids) {
         results = data.filter(item => {
             let fullName = `${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`
             return item.uid.includes(query) || item.email.includes(query) || fullName.includes(query)
+        })
+    } else if (ids && ids.length > 0 && !query) {
+        results = data.filter(item => {
+            let match = false
+            ids.forEach(id => {
+                if (item.uid == id) match = true
+            })
+            return match
         })
     }
     
