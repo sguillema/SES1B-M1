@@ -9,6 +9,7 @@ const users = require('./middleware/users')
 const doctors = require('./middleware/doctors')
 const patients = require('./middleware/patients')
 const packets = require('./middleware/packets')
+const pairs = require('./middleware/pairs')
 
 app.use(
     bodyParser.json(), 
@@ -16,7 +17,8 @@ app.use(
     users, 
     doctors,
     patients, 
-    packets
+    packets,
+    pairs
 )
 
 app.get('/', (req, res) => res.send('Hello World!'))
