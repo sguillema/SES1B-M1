@@ -30,7 +30,7 @@ pairs.get('/pairs', async (req, res) => {
         if (pairs.length != 0) {
             res.send(pairs)
         } else {
-            res.status(404).sent("Pair not found")
+            res.status(404).send("Pair not found")
         }
     } else {
         res.send(data)
