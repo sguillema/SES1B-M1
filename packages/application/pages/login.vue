@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container">
+  <v-container>
     <v-layout column justify-center align-center fill-height>
       <img src="../assets/doctor.jpg" alt="This is a doc" class="doc-image" />
         <div>
@@ -75,10 +75,6 @@
 </script>
 
 <style scoped>
-.container{
-  margin-top: 56px;
-  margin-bottom: 56px;
-}
 .doc-image{
   width: 150px;
 }

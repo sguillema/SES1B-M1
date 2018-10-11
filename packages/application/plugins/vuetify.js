@@ -20,7 +20,8 @@ import {
   VAlert,
   VDialog,
   VChip,
-  VDivider
+  VDivider,
+  VTabs
 } from 'vuetify'
 // import Vuetify from 'vuetify'
 
@@ -45,7 +46,8 @@ Vue.use(Vuetify, {
     VAlert,
     VDialog,
     VChip,
-    VDivider
+    VDivider,
+    VTabs
   }
 })
 // Vue.use(Vuetify)
