@@ -8,8 +8,8 @@
         Pair with Patient
       </v-tab>
       <v-tab-item :id="list">
-        <v-card flat>
-          <v-card-text>asdsads</v-card-text>
+        <v-card flat v-for="(patient) in this.$store.state.userPatients" :key="patient.uid">
+          <v-card-text>{{`${patient.first_name} ${patient.last_name} - ID HERE`}}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs>
@@ -33,7 +33,7 @@ export default {
   mounted () {
     axios.get(`${process.env.apiUrl}/pairs?doctor=${this.$store.state.profileId}`)
       .then(res => {
-        // this.$store.commit('updatePackets', res.data)
+        this.$store.commit('updatePatients', res.data)
       })
   }
 }

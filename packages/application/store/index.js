@@ -7,7 +7,8 @@ export const state = () => ({
   userType: null,
   profileId: null,
   pageTitle: null,
-  userPackets: []
+  userPackets: [],
+  userPatients: []
 })
 
 export const mutations = {
@@ -28,6 +29,9 @@ export const mutations = {
   },
   updatePackets (state, data) {
     state.userPackets = data
+  },
+  updatePatients (state, data) {
+    state.userPatients = data
   },
   clearAuth (state) {
     state.auth = null
