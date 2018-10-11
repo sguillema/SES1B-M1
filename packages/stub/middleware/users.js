@@ -117,7 +117,7 @@ users.post('/users/auth', async (req, res) => {
             user: {
                 uid: user.uid,
                 type: user.type,
-                profile: user.profile_id
+                profileId: user.profile_id
             },
             token: "supersecret"
         })

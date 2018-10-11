@@ -57,7 +57,7 @@ export const actions = {
       let user = JSON.parse(parsed.user)
       userId = user.uid
       userType = user.type
-      profileId = user.profile
+      profileId = user.profileId
     }
     commit('updateAuth', token)
     commit('updateUserId', userId)

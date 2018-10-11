@@ -49,6 +49,7 @@
             .then(res => {
               this.$store.commit('updateAuth', res.data.token)
               this.$store.commit('updateUserId', res.data.user.uid)
+              this.$store.commit('updateProfileId', res.data.user.profileId)
               this.$store.commit('updateUserType', res.data.user.type)
               let oneHour = moment().add(1, 'hours').toDate()
               Cookies.set('auth', res.data.token, {
