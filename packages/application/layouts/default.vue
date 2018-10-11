@@ -6,9 +6,7 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
-      <v-container class="container">
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-bottom-nav class="nav bottom" :active.sync="bottomNav" :value="true" fixed color="white">
       <v-btn color="blue" flat value="home" to="/">
@@ -23,6 +21,11 @@
 
       <v-btn color="blue" flat value="patients" to="/patients" v-if="userType === 'doctor'">
         <span>Patients</span>
+        <v-icon>people</v-icon>
+      </v-btn>
+
+      <v-btn color="blue" flat value="doctors" to="/doctors" v-if="userType === 'patient'">
+        <span>Doctors</span>
         <v-icon>people</v-icon>
       </v-btn>
 
@@ -52,10 +55,6 @@
 </script>
 
 <style scoped>
-.container{
-  margin-top: 56px;
-  margin-bottom: 56px;
-}
 .nav{
   box-shadow: none;
 }

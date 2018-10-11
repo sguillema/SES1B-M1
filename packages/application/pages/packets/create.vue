@@ -1,42 +1,44 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <v-card>
-        <v-card-title>
-          <h1>Create a Packet</h1>
-        </v-card-title>
-        <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="doctor" :rules="rules.doctor" label="Doctor" required></v-text-field>
-            <v-text-field v-model="heartRate" label="Heart Rate (optional)" suffix="bpm"></v-text-field>
-            <a style="font-size: 12px">Instructions on how to get your heart rate<br><br></a>
-            <v-textarea name="content" :rules="rules.content" label="Message" v-model="content" box required></v-textarea>
-            <v-layout column>
-              <h4>Upload Video (Optional)</h4>
-              <input type="file" id="video" name="video" accept="video/*">
+  <v-container class="container">
+    <v-layout column justify-center align-center>
+      <v-flex xs12 sm8 md6>
+        <v-card>
+          <v-card-title>
+            <h1>Create a Packet</h1>
+          </v-card-title>
+          <v-card-text>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-text-field v-model="doctor" :rules="rules.doctor" label="Doctor" required></v-text-field>
+              <v-text-field v-model="heartRate" label="Heart Rate (optional)" suffix="bpm"></v-text-field>
+              <a style="font-size: 12px">Instructions on how to get your heart rate<br><br></a>
+              <v-textarea name="content" :rules="rules.content" label="Message" v-model="content" box required></v-textarea>
+              <v-layout column>
+                <h4>Upload Video (Optional)</h4>
+                <input type="file" id="video" name="video" accept="video/*">
+              </v-layout>
+              <v-layout column>
+                <h4>Upload Additional Document(s) (Optional)</h4>
+                <input type="file" id="document" name="document" accept="image/*, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+              </v-layout>
+              <v-btn class="submit-button" :disabled="!valid" :loading="loading" @click="submit" color="primary" block>
+                Submit Packet
+              </v-btn>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-dialog v-model="dialog" width="300">
+        <v-card>
+          <v-card-text>
+            <v-layout column justify-center align-center>
+              <v-alert :value="true" type="success" icon="check_circle">{{successMessage}}</v-alert>
+              <v-btn @click="dialog = false; clear()">Return</v-btn>
             </v-layout>
-            <v-layout column>
-              <h4>Upload Additional Document(s) (Optional)</h4>
-              <input type="file" id="document" name="document" accept="image/*, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-            </v-layout>
-            <v-btn class="submit-button" :disabled="!valid" :loading="loading" @click="submit" color="primary" block>
-              Submit Packet
-            </v-btn>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-    <v-dialog v-model="dialog" width="300">
-      <v-card>
-        <v-card-text>
-          <v-layout column justify-center align-center>
-            <v-alert :value="true" type="success" icon="check_circle">{{successMessage}}</v-alert>
-            <v-btn @click="dialog = false; clear()">Return</v-btn>
-          </v-layout>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -92,6 +94,10 @@
 </script>
 
 <style scoped>
+.container{
+  margin-top: 56px;
+  margin-bottom: 56px;
+}
 .submit-button{
   margin-top: 30px;
 }
