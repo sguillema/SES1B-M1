@@ -11,9 +11,31 @@ const helpers = require('../helpers/helpers')
 let data = require('../mocks/patients')
 const patientsSchema = require('../mocks/patients-schema')
 
-// GET -- Return all patients
+// GET -- Return patients based on search query. Query must be minimum 3 characters, otherwise return none. If no query provided, return all
 patients.get('/patients', async (req, res) => {
-    res.send(data)
+    let query = req.query.search.toLowerCase() || null
+    if (query && query.length < 3) {
+        query = null
+    }
+
+    let results = null
+    if (query) {
+        results = data.filter(item => {
+            let fullName = `${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`
+            return item.uid.includes(query) || item.email.includes(query) || fullName.includes(query)
+        })
+    }
+    
+    if (results && results.length > 0) {
+        res.send(results)
+    } else if (results && results.length == 0) {
+        res.status(404).send('No Patients found')
+    } else {
+        res.send(data)
+
+        // TODO: Differentiate between bad request and GET all request
+        // res.status(400).send('Bad request')
+    }
 })
 
 // POST -- Create a patient, return error if already exists
