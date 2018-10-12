@@ -35,10 +35,11 @@
               this.patient = res.data
             })
         }
+        this.$store.commit('updatePageTitle', `Patient - ${this.patient.first_name} ${this.patient.last_name}`)
       }
     },
     fetch ({store, route}) {
-      store.commit('updatePageTitle', `Patient ${route.params.id}`)
+      store.commit('updatePageTitle', `Patient ...`)
     }
   }
 </script>

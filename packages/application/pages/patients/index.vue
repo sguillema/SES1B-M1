@@ -8,8 +8,22 @@
         Pair with Patient
       </v-tab>
       <v-tab-item :id="list">
-        <v-card flat v-for="(patient) in this.$store.state.userPatients" :key="patient.uid">
-          <v-card-text>{{`${patient.first_name} ${patient.last_name} - ID HERE`}}</v-card-text>
+        <v-card raised>
+          <v-list subheader three-line>
+            <div v-for="(patient) in this.$store.state.userPatients" :key="patient.uid">
+              <v-list-tile :to="'patients/' + patient.uid">
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    {{`${patient.first_name} ${patient.last_name}`}}
+                  </v-list-tile-title>
+                  <v-list-tile-sub-title>
+                    {{`${patient.uid}`}}
+                  </v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-divider v-if="index < $store.state.userPatients.length - 1" :key="index"></v-divider>
+            </div>
+          </v-list>
         </v-card>
       </v-tab-item>
     </v-tabs>
