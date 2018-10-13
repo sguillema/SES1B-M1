@@ -6,29 +6,46 @@
         <span class="subtitle">ref id: {{packet.uid}}</span>
       </v-card-title>
       <v-card-text class="packet-details">
-        <h3>Details</h3>
-        <p><b>Date sent:</b> {{processDate(packet.created_at, 'DD/MM/YYYY')}}</p>
-        <p><b>Patient ID:</b> <nuxt-link :to="'/patients/' + packet.user_id">{{packet.user_id}}</nuxt-link></p>
-        <p><b>Doctor ID:</b> <nuxt-link :to="'/doctors/' + packet.doctor_id">{{packet.doctor_id}}</nuxt-link></p>
-        <p><b>Status:</b> <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip></p>
-        <v-divider></v-divider>
-        <p><b>Location:</b> {{packet.location || `Not attached`}}</p>
-        <p><b>Heart rate:</b> {{packet.heart_rate || `Not attached`}}</p>
-        <p><b>Content:</b> "{{packet.content}}"</p>
-        <v-divider></v-divider>
-        <h3>Attachments</h3>
-        <div class="attachment">
-          <p><b>Video</b></p>
-          <v-btn class="download-button" disabled color="primary" block>
-            Download
-          </v-btn>
-        </div>
-        <div class="attachment">
-          <p><b>Document</b></p>
-          <v-btn class="download-button" disabled color="primary" block>
-            Download
-          </v-btn>
-        </div>
+        <v-expansion-panel :value="0">
+          <v-expansion-panel-content class="panel-content">
+            <h3 slot="header">Details</h3>
+            <div class="panel-content-container">
+              <p><b>Date sent:</b> {{processDate(packet.created_at, 'DD/MM/YYYY')}}</p>
+              <p><b>Patient ID:</b> <nuxt-link :to="'/patients/' + packet.user_id">{{packet.user_id}}</nuxt-link></p>
+              <p><b>Doctor ID:</b> <nuxt-link :to="'/doctors/' + packet.doctor_id">{{packet.doctor_id}}</nuxt-link></p>
+              <p><b>Status:</b> <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip></p>
+              <v-divider></v-divider>
+              <p><b>Location:</b> {{packet.location || `Not attached`}}</p>
+              <p><b>Heart rate:</b> {{packet.heart_rate || `Not attached`}}</p>
+              <p><b>Content:</b> "{{packet.content}}"</p>
+            </div>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content class="panel-content">
+            <h3 slot="header">Attachments</h3>
+            <div class="panel-content-container">
+              <div class="attachment">
+                <p><b>Video</b></p>
+                <v-btn class="download-button" disabled color="primary" block>
+                  Download
+                </v-btn>
+              </div>
+              <div class="attachment">
+                <p><b>Document</b></p>
+                <v-btn class="download-button" disabled color="primary" block>
+                  Download
+                </v-btn>
+              </div>
+            </div>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content class="panel-content">
+            <h3 slot="header">Feedback</h3>
+            <div class="panel-content-container">
+              <div class="feedback">
+
+              </div>
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-card-text>
     </v-card>
   </div>
@@ -81,27 +98,33 @@
 .subtitle{
   opacity: 0.5;
 }
-.packet-details > h3{
+.packet-details{
+  padding: 0;
+}
+.panel-content-container{
+  padding: 15px 30px;
+}
+/* .packet-details > h3{
   margin-bottom: 10px;
-}
-.packet-details > p{
+} */
+/* .packet-details > p{
   margin-left: 20px;
-}
+} */
 .chip{
   text-transform: capitalize;
   height: 20px;
 }
-p + hr{
-  margin-bottom: 20px;
+hr + *{
+  margin-top: 20px;
 }
 .attachment{
-  margin-left: 20px;
-  margin-bottom: 10px;
+  /* margin-left: 10px; */
+  margin-bottom: 20px;
 }
 .attachment p{
   margin-bottom: 10px;
 }
 .download-button{
-  width: calc(100% - 20px);
+  /* width: calc(100% - 10px); */
 }
 </style>
