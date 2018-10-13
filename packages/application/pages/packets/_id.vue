@@ -8,8 +8,8 @@
           </v-card-title>
           <v-card-text>
             <p>date created: {{processDate(packet.created_at, 'DD/MM/YYYY')}}</p>
-            <p>patient id: <a :to="'patients/' + packet.user_id">{{packet.user_id}}</a></p>
-            <p>doctor id: <a :to="'doctors/' + packet.doctor_id">{{packet.doctor_id}}</a></p>
+            <p>patient id: <nuxt-link :to="'/patients/' + packet.user_id">{{packet.user_id}}</nuxt-link></p>
+            <p>doctor id: <nuxt-link :to="'/doctors/' + packet.doctor_id">{{packet.doctor_id}}</nuxt-link></p>
             <p>status: <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip></p>
             <div>
               <h3>Content</h3>

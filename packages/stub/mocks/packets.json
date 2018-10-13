@@ -38,7 +38,7 @@
         "created_at": "0000"
     },
     {
-        "user_id": "0000",
+        "user_id": "5678",
         "doctor_id": "0000",
         "status": "responded",
         "content": "I think I'm dying.",
