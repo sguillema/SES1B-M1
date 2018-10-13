@@ -1,6 +1,6 @@
 [
     {
-        "user_id": "01234",
+        "user_id": "1234",
         "doctor_id": "0000",
         "status": "pending",
         "content": "I'm very sick!",
@@ -19,7 +19,7 @@
         "created_at": "0000"
     },
     {
-        "user_id": "01234",
+        "user_id": "1234",
         "doctor_id": "0001",
         "status": "pending",
         "content": "I'm not feeling so well Mr Stark....",
