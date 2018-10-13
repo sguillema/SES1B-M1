@@ -10,7 +10,7 @@
       <v-tab-item :id="list">
         <v-card raised>
           <v-list subheader three-line>
-            <div v-for="(patient) in this.$store.state.userPatients" :key="patient.uid">
+            <div v-for="(patient, index) in this.$store.state.userPatients" :key="patient.uid">
               <v-list-tile :to="'patients/' + patient.uid">
                 <v-list-tile-content>
                   <v-list-tile-title>

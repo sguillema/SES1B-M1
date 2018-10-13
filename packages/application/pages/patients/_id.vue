@@ -5,35 +5,41 @@
         <h2>{{`${this.patient.first_name} ${this.patient.last_name}`}}</h2>
         <span class="subtitle">ref id: {{this.patient.uid}}</span>
       </v-card-title>
-      <v-divider></v-divider>
       <v-card-text class="patient-details">
-        <h3>Details</h3>
-        <p><b>Email:</b> {{this.patient.email}}</p>
-        <p><b>Sex:</b> {{this.patient.sex}}</p>
-        <p><b>DOB:</b> {{this.patient.dob}}</p>
-        <p><b>Height:</b> {{this.patient.height}}</p>
-        <p><b>Weight:</b> {{this.patient.weight}}</p>
-        <p><b>Medical Conditions:</b> WIP</p>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-text>
-        <h3>Packets</h3>
-        <v-list>
-          <div v-for="(packet, index) in packets" :key="packet.uid">
-            <v-list-tile :to="`/packets/${packet.uid}`">
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  {{processDate(packet.created_at, 'DD/MM/YYYY')}}
-                  <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip>
-                </v-list-tile-title>
-                <v-list-tile-sub-title>
-                  ref id: {{packet.uid}}
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-divider v-if="index < packets.length - 1" :key="index"></v-divider>
-          </div>
-        </v-list>
+        <v-expansion-panel :value="0">
+          <v-expansion-panel-content class="panel-content">
+            <h3 slot="header">Details</h3>
+            <div class="panel-content-container">
+            <p><b>Email:</b> {{this.patient.email}}</p>
+            <p><b>Sex:</b> {{this.patient.sex}}</p>
+            <p><b>DOB:</b> {{this.patient.dob}}</p>
+            <p><b>Height:</b> {{this.patient.height}}</p>
+            <p><b>Weight:</b> {{this.patient.weight}}</p>
+            <p><b>Medical Conditions:</b> WIP</p>
+            </div>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content class="panel-content">
+            <h3 slot="header">Packets</h3>
+            <div class="panel-content-container">
+            <v-list>
+              <div v-for="(packet, index) in packets" :key="packet.uid">
+                <v-list-tile :to="`/packets/${packet.uid}`">
+                  <v-list-tile-content>
+                    <v-list-tile-title>
+                      {{processDate(packet.created_at, 'DD/MM/YYYY')}}
+                      <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip>
+                    </v-list-tile-title>
+                    <v-list-tile-sub-title>
+                      ref id: {{packet.uid}}
+                    </v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-divider v-if="index < packets.length - 1" :key="index"></v-divider>
+              </div>
+            </v-list>
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-card-text>
     </v-card>
   </div>
@@ -115,11 +121,11 @@
 .subtitle{
   opacity: 0.5;
 }
-.patient-details h3{
-  margin-bottom: 10px;
+.patient-details{
+  padding: 0;
 }
-.patient-details p{
-  margin-left: 20px;
+.panel-content-container{
+  padding: 15px 30px;
 }
 .chip{
   text-transform: capitalize;

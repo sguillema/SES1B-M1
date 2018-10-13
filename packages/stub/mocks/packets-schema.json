@@ -19,7 +19,8 @@
                     "doc_url": {"type": "string"}
                 }
             }
-        }
+        },
+        "feedback": {"type": "string"}
     },
     "required": [
         "uid",

@@ -21,7 +21,8 @@ import {
   VDialog,
   VChip,
   VDivider,
-  VTabs
+  VTabs,
+  VExpansionPanel
 } from 'vuetify'
 // import Vuetify from 'vuetify'
 
@@ -47,7 +48,8 @@ Vue.use(Vuetify, {
     VDialog,
     VChip,
     VDivider,
-    VTabs
+    VTabs,
+    VExpansionPanel
   }
 })
 // Vue.use(Vuetify)

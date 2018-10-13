@@ -65,6 +65,29 @@ packets.get('/packets/:packetId', (req, res) => {
 	}
 })
 
+// PATCH -- Update a packet by id, return error if not found
+packets.patch('/packets/:packetId', (req, res) => {
+	let index = null
+	let packet = data.find((item, i) => {
+		if (req.params.packetId == item.uid) {
+			index = i
+			return item
+		}
+	})
+
+	if (packet) {
+		data[index]['feedback'] = req.body.feedback
+		if (!req.body.feedback) {
+			data[index]['status'] = 'pending'
+		} else {
+			data[index]['status'] = 'responded'
+		}
+		res.status(200).send("Packet updated!")
+	} else {
+		res.status(404).send("Packet could not be found")
+	}
+})
+
 class Middleware {
     
 }
