@@ -14,7 +14,7 @@
                 "doc_url": "url here"
             }
         ],
-        "doctor_comment": "",
+        "feedback": "",
         "uid": "0000",
         "created_at": "0000"
     },
@@ -33,7 +33,7 @@
                 "doc_url": "url here"
             }
         ],
-        "doctor_comment": "",
+        "feedback": "",
         "uid": "0001",
         "created_at": "0000"
     },
@@ -47,7 +47,7 @@
         "video_url": "",
         "documents": [
         ],
-        "doctor_comment": "You're very sick dude.",
+        "feedback": "You're very sick dude.",
         "uid": "0002",
         "created_at": "0000"
     }

@@ -40,8 +40,11 @@
           <v-expansion-panel-content class="panel-content">
             <h3 slot="header">Feedback</h3>
             <div class="panel-content-container">
-              <div class="feedback">
-
+              <div class="feedback-form">
+                <v-textarea outline name="feedback-textarea" label="Feedback" v-model="feedback"></v-textarea>
+                <v-btn class="feedback-button" color="primary" @click="submit" block>
+                  Send/Update
+                </v-btn>
               </div>
             </div>
           </v-expansion-panel-content>
@@ -59,11 +62,19 @@
     middleware: 'authenticated',
     data () {
       return {
-        packet: {}
+        packet: {},
+        feedback: ''
       }
     },
     methods: {
       submit () {
+        axios.patch(`${process.env.apiUrl}/packets/${this.$route.params.id}`, {feedback: this.feedback})
+          .then(res => {
+            return axios.get(`${process.env.apiUrl}/packets/${this.$route.params.id}`)
+          })
+          .then(res => {
+            this.packet = res.data
+          })
       },
       clear () {
       },
@@ -75,6 +86,7 @@
       axios.get(`${process.env.apiUrl}/packets/${this.$route.params.id}`)
         .then(res => {
           this.packet = res.data
+          this.feedback = this.packet.feedback
         })
     },
     fetch ({store, route}) {
