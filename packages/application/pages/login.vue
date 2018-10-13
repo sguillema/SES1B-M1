@@ -1,16 +1,18 @@
 <template>
-	<v-layout column justify-center align-center fill-height>
-		<img src="../assets/doctor.jpg" alt="This is a doc" class="doc-image" />
-   		<div>
-			<v-form ref="form" v-model="valid" lazy-validation>
-				<v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-				<v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
-				<v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
-        <nuxt-link class="register" to="/register">Register</nuxt-link>
-        <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
-			</v-form>
-		</div>
+  <v-container>
+    <v-layout column justify-center align-center fill-height>
+      <img src="../assets/doctor.jpg" alt="This is a doc" class="doc-image" />
+        <div>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+          <v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
+          <v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
+          <nuxt-link class="register" to="/register">Register</nuxt-link>
+          <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
+        </v-form>
+      </div>
   	</v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -47,6 +49,7 @@
             .then(res => {
               this.$store.commit('updateAuth', res.data.token)
               this.$store.commit('updateUserId', res.data.user.uid)
+              this.$store.commit('updateProfileId', res.data.user.profileId)
               this.$store.commit('updateUserType', res.data.user.type)
               let oneHour = moment().add(1, 'hours').toDate()
               Cookies.set('auth', res.data.token, {

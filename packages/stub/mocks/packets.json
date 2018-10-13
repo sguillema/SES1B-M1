@@ -1,7 +1,7 @@
 [
     {
-        "user_id": "01234",
-        "doctor_id": "56789",
+        "user_id": "1234",
+        "doctor_id": "0000",
         "status": "pending",
         "content": "I'm very sick!",
         "location": "",
@@ -19,7 +19,7 @@
         "created_at": "0000"
     },
     {
-        "user_id": "01234",
+        "user_id": "1234",
         "doctor_id": "0001",
         "status": "pending",
         "content": "I'm not feeling so well Mr Stark....",
@@ -39,7 +39,7 @@
     },
     {
         "user_id": "0000",
-        "doctor_id": "56789",
+        "doctor_id": "0000",
         "status": "responded",
         "content": "I think I'm dying.",
         "location": "",

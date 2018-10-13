@@ -1,6 +1,6 @@
 <template>
+<v-container class="container">
 	<v-layout column justify-center align-center fill-height>
-
    		<div v-if="step == 1">
          <h1>Make a Profile</h1>
 			<v-form ref="form" v-model="valid" lazy-validation>
@@ -55,6 +55,7 @@
 			</v-form>
 		</div>
   	</v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -161,6 +162,10 @@
 </script>
 
 <style scoped>
+.container{
+  margin-top: 56px;
+  margin-bottom: 56px;
+}
 .back{
   padding: 0 16px;
   display: block;

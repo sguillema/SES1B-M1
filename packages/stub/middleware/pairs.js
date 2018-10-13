@@ -5,6 +5,7 @@ const Ajv = require('ajv')
 const ajv = new Ajv()
 
 const moment = require('moment')
+const axios = require('axios')
 
 const helpers = require('../helpers/helpers')
 
@@ -19,18 +20,33 @@ pairs.get('/pairs', async (req, res) => {
     if (patientId || doctorId) {
         let pairs = data.filter(item => {
             if (patientId && doctorId) {
-                return item.user_id == patientId && item.doctor_id == doctorId
+                return item.patient_id == patientId && item.doctor_id == doctorId
             } else if (patientId && !doctorId) {
-                return item.user_id == patientId
+                return item.patient_id == patientId
             } else if (!patientId && doctorId) {
                 return item.doctor_id == doctorId
             }
         })
 
-        if (pairs.length != 0) {
-            res.send(pairs)
+        let results = []
+        if (!patientId && doctorId) {
+            let patientIds = pairs.map(item => {
+                return item.patient_id
+            })
+            let patients = await axios.get(`http://localhost:4000/patients?ids=${patientIds.toString()}`)
+            results = patients.data
+        } else if (patientId && !doctorId) {
+            let doctorIds = pairs.map(item => {
+                return item.doctor_id
+            })
+            let doctors = await axios.get(`http://localhost:4000/doctors?ids=${doctorIds.toString()}`)
+            results = doctors.data
+        }
+
+        if (results.length != 0) {
+            res.send(results)
         } else {
-            res.status(404).sent("Pair not found")
+            res.status(404).send("Pair not found")
         }
     } else {
         res.send(data)
