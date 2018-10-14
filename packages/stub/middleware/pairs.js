@@ -14,7 +14,7 @@ const pairsSchema = require('../mocks/pairs-schema')
 
 // GET -- Return pairs based on patient or doctor query, otherwise return all
 pairs.get('/pairs', async (req, res) => {
-    let patientId = req.query.user || null
+    let patientId = req.query.patient || null
     let doctorId = req.query.doctor || null
     
     if (patientId || doctorId) {

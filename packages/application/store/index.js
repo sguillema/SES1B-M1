@@ -8,6 +8,7 @@ export const state = () => ({
   profileId: null,
   pageTitle: null,
   userPackets: [],
+  userDoctors: [],
   userPatients: []
 })
 
@@ -29,6 +30,9 @@ export const mutations = {
   },
   updatePackets (state, data) {
     state.userPackets = data
+  },
+  updateDoctors (state, data) {
+    state.userDoctors = data
   },
   updatePatients (state, data) {
     state.userPatients = data
