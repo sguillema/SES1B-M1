@@ -40,11 +40,15 @@
           <v-expansion-panel-content class="panel-content">
             <h3 slot="header">Feedback</h3>
             <div class="panel-content-container">
-              <div class="feedback-form">
+              <div v-if="this.$store.state.userType == 'doctor'" class="feedback-form">
                 <v-textarea outline name="feedback-textarea" label="Feedback" v-model="feedback"></v-textarea>
                 <v-btn class="feedback-button" color="primary" @click="submit" block>
                   Send/Update
                 </v-btn>
+              </div>
+              <div v-else class="feedback-form">
+                <p v-if="feedback != ''">"{{feedback}}"</p>
+                <p v-else style="opacity: 0.5"><i>This packet has not been responded to yet.</i></p>
               </div>
             </div>
           </v-expansion-panel-content>
