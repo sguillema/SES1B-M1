@@ -55,6 +55,8 @@ pairs.get('/pairs', async (req, res) => {
 
 // POST -- Create a pair, return error if already exists
 pairs.post('/pairs', async (req, res) => {
+    req.body.uid = helpers.generateId()
+    req.body.created_at = moment().format()
     let valid = ajv.validate(pairsSchema, req.body)
     let existing = data.find(item => {
         return req.body.doctor_id == item.doctor_id && req.body.patient_id == item.patient_id

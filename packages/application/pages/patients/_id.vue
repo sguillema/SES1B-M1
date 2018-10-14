@@ -2,19 +2,26 @@
   <div class="page">
     <v-card>
       <v-card-title class="title-container">
-        <h2>{{`${this.patient.first_name} ${this.patient.last_name}`}}</h2>
-        <span class="subtitle">ref id: {{this.patient.uid}}</span>
+        <h2>{{`${patient.first_name} ${patient.last_name}`}}</h2>
+        <span class="subtitle">ref id: {{patient.uid}}</span>
+        <v-chip v-if="isPaired(patient.uid)" class="chip" :color="'white'" text-color="blue" small>
+          <v-avatar>
+            <v-icon>check_circle</v-icon>
+          </v-avatar>
+          Paired
+        </v-chip>
+        <v-btn v-else round small color="green" dark @click="pair">Pair</v-btn>
       </v-card-title>
       <v-card-text class="patient-details">
         <v-expansion-panel :value="0">
           <v-expansion-panel-content class="panel-content">
             <h3 slot="header">Details</h3>
             <div class="panel-content-container">
-            <p><b>Email:</b> {{this.patient.email}}</p>
-            <p><b>Sex:</b> {{this.patient.sex}}</p>
-            <p><b>DOB:</b> {{this.patient.dob}}</p>
-            <p><b>Height:</b> {{this.patient.height}}</p>
-            <p><b>Weight:</b> {{this.patient.weight}}</p>
+            <p><b>Email:</b> {{patient.email}}</p>
+            <p><b>Sex:</b> {{patient.sex}}</p>
+            <p><b>DOB:</b> {{patient.dob}}</p>
+            <p><b>Height:</b> {{patient.height}}</p>
+            <p><b>Weight:</b> {{patient.weight}}</p>
             <p><b>Medical Conditions:</b> WIP</p>
             </div>
           </v-expansion-panel-content>
@@ -64,6 +71,30 @@
       },
       processDate (date, format) {
         return moment(date).format(format)
+      },
+      isPaired (uid) {
+        let patient = null
+        patient = this.$store.state.userPatients.find(item => {
+          return item.uid === uid
+        })
+        if (patient) {
+          return true
+        } else {
+          return false
+        }
+      },
+      pair () {
+        let payload = {
+          doctor_id: this.$store.state.profileId,
+          patient_id: this.$route.params.id
+        }
+        axios.post(`${process.env.apiUrl}/pairs`, payload)
+          .then(res => {
+            let patients = []
+            patients = this.$store.state.userPatients.slice()
+            patients.push(this.patient)
+            this.$store.commit('updatePatients', patients)
+          })
       }
     },
     mounted () {
@@ -129,6 +160,6 @@
 }
 .chip{
   text-transform: capitalize;
-  height: 20px;
+  height: 25px;
 }
 </style>

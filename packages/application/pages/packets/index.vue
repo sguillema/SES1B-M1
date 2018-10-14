@@ -1,13 +1,13 @@
 <template>
   <div class="page">
-    <v-tabs v-model="active" color="white" slider-color="blue" centered grow fixed-tabs>
-      <v-tab :key="list" rippleactive>
+    <v-tabs color="white" slider-color="blue" centered grow fixed-tabs>
+      <v-tab :key="'list'" ripple active>
         My Packets
       </v-tab>
-      <v-tab :key="create" ripple>
+      <v-tab :key="'create'" ripple>
         Create Packet
       </v-tab>
-      <v-tab-item :id="list">
+      <v-tab-item :key="'list'">
         <v-card raised>
           <v-list subheader three-line>
             <div v-for="(packet, index) in this.$store.state.userPackets" :key="packet.uid">

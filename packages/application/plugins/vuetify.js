@@ -22,7 +22,9 @@ import {
   VChip,
   VDivider,
   VTabs,
-  VExpansionPanel
+  VExpansionPanel,
+  VProgressCircular,
+  VAvatar
 } from 'vuetify'
 // import Vuetify from 'vuetify'
 
@@ -49,7 +51,9 @@ Vue.use(Vuetify, {
     VChip,
     VDivider,
     VTabs,
-    VExpansionPanel
+    VExpansionPanel,
+    VProgressCircular,
+    VAvatar
   }
 })
 // Vue.use(Vuetify)
