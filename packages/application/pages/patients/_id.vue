@@ -175,4 +175,7 @@
   text-transform: capitalize;
   height: 25px;
 }
+.panel-content-container .chip{
+  height: 18px;
+}
 </style>
