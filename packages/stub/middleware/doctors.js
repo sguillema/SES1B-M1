@@ -11,9 +11,47 @@ const helpers = require('../helpers/helpers')
 let data = require('../mocks/doctors')
 const doctorsSchema = require('../mocks/doctors-schema')
 
-// GET -- Return all doctors
+// GET -- Return doctors based on search query. Query must be minimum 3 characters, otherwise return none. OR return doctors based on ids (preferable to use /:doctorId endpoint for single doctor). If no query or ids provided, return all
 doctors.get('/doctors', async (req, res) => {
-    res.send(data)
+    let idsQuery = req.query.ids || null
+    let searchQuery = req.query.search || null
+    let ids = null
+    let query = null
+
+    if (idsQuery) ids = idsQuery.split(',')
+    if (searchQuery) {
+        query = searchQuery.toLowerCase()
+        if (query && query.length < 3) {
+            query = null
+        }
+    }
+
+    let results = null
+    if (query && !ids) {
+        results = data.filter(item => {
+            let fullName = `${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`
+            return item.uid.includes(query) || item.email.includes(query) || fullName.includes(query)
+        })
+    } else if (ids && ids.length > 0 && !query) {
+        results = data.filter(item => {
+            let match = false
+            ids.forEach(id => {
+                if (item.uid == id) match = true
+            })
+            return match
+        })
+    }
+    
+    if (results && results.length > 0) {
+        res.send(results)
+    } else if (results && results.length == 0) {
+        res.status(404).send('No Doctors found')
+    } else {
+        res.send(data)
+
+        // TODO: Differentiate between bad request and GET all request
+        // res.status(400).send('Bad request')
+    }
 })
 
 // POST -- Create a doctor, return error if already exists
