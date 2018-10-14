@@ -11,8 +11,10 @@
             <h3 slot="header">Details</h3>
             <div class="panel-content-container">
               <p><b>Date sent:</b> {{processDate(packet.created_at, 'DD/MM/YYYY')}}</p>
-              <p><b>Patient ID:</b> <nuxt-link :to="'/patients/' + packet.user_id">{{packet.user_id}}</nuxt-link></p>
-              <p><b>Doctor ID:</b> <nuxt-link :to="'/doctors/' + packet.doctor_id">{{packet.doctor_id}}</nuxt-link></p>
+              <p v-if="!isMe(packet.user_id)"><b>Patient ID:</b> <nuxt-link :to="'/patients/' + packet.user_id">{{packet.user_id}}</nuxt-link></p>
+              <p v-else><b>Patient ID:</b> (You) {{packet.user_id}}</p>
+              <p v-if="!isMe(packet.doctor_id)"><b>Doctor ID:</b> <nuxt-link :to="'/doctors/' + packet.doctor_id">{{packet.doctor_id}}</nuxt-link></p>
+              <p v-else><b>Doctor ID:</b> (You) {{packet.doctor_id}}</p>
               <p><b>Status:</b> <v-chip class="chip" :color="packet.status == 'responded' ? 'green' : 'primary'" text-color="white" small>{{packet.status}}</v-chip></p>
               <v-divider></v-divider>
               <p><b>Location:</b> {{packet.location || `Not attached`}}</p>
@@ -79,6 +81,13 @@
           .then(res => {
             this.packet = res.data
           })
+      },
+      isMe (uid) {
+        if (this.$store.state.profileId === uid) {
+          return true
+        } else {
+          return false
+        }
       },
       clear () {
       },

@@ -13,13 +13,16 @@
             <div v-for="(packet, index) in this.$store.state.userPackets" :key="packet.uid">
               <v-list-tile :to="'packets/' + packet.uid" class="packet-tile">
                 <v-list-tile-content>
-                  <v-list-tile-title>
+                  <v-list-tile-title v-if="userType == 'doctor'">
                     {{getPacketName(packet)}}
+                  </v-list-tile-title>
+                  <v-list-tile-title v-else-if="userType == 'patient'">
+                    To: {{getPacketName(packet)}}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     Date created: {{processDate(packet.created_at, 'DD/MM/YYYY')}}
                   </v-list-tile-sub-title>
-                  <v-list-tile-sub-title>
+                  <v-list-tile-sub-title v-if="userType == 'doctor'">
                     Patient: {{packet.user_id}}
                   </v-list-tile-sub-title>
                   <v-list-tile-sub-title>
@@ -46,7 +49,8 @@
     middleware: 'authenticated',
     data () {
       return {
-        hello: 'hello'
+        hello: 'hello',
+        userType: ''
       }
     },
     methods: {
@@ -55,7 +59,7 @@
       },
       getPacketName (packet) {
         let target = null
-        switch (this.$store.state.userType.toLowerCase()) {
+        switch (this.userType) {
           case 'doctor':
             target = this.$store.state.userPatients.find(patient => {
               return packet.user_id === patient.uid
@@ -76,20 +80,35 @@
     fetch ({store}) {
       store.commit('updatePageTitle', 'Packets')
     },
-    mounted () {
+    async mounted () {
+      let isDataFetched = false
+      let packets
+      let pairs
+      if (this.$store.state.userDoctors || this.$store.state.userPatients) {
+        isDataFetched = true
+      }
+
       // if (this.$store.state.userPackets == null) {
       switch (this.$store.state.userType.toLowerCase()) {
         case 'doctor':
-          axios.get(`${process.env.apiUrl}/packets?doctor=${this.$store.state.profileId}`)
-            .then(res => {
-              this.$store.commit('updatePackets', res.data)
-            })
+          this.userType = 'doctor'
+          if (!isDataFetched) {
+            pairs = await axios.get(`${process.env.apiUrl}/pairs?doctor=${this.$store.state.profileId}`)
+            this.$store.commit('updatePatients', pairs.data)
+          }
+
+          packets = await axios.get(`${process.env.apiUrl}/packets?doctor=${this.$store.state.profileId}`)
+          this.$store.commit('updatePackets', packets.data)
           break
         case 'patient':
-          axios.get(`${process.env.apiUrl}/packets?user=${this.$store.state.profileId}`)
-            .then(res => {
-              this.$store.commit('updatePackets', res.data)
-            })
+          this.userType = 'patient'
+          if (!isDataFetched) {
+            pairs = await axios.get(`${process.env.apiUrl}/pairs?patient=${this.$store.state.profileId}`)
+            this.$store.commit('updateDoctors', pairs.data)
+          }
+
+          packets = await axios.get(`${process.env.apiUrl}/packets?user=${this.$store.state.profileId}`)
+          this.$store.commit('updatePackets', packets.data)
           break
       }
       // }

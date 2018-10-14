@@ -4,7 +4,13 @@
       <v-card-title class="title-container">
         <h2>{{`${patient.first_name} ${patient.last_name}`}}</h2>
         <span class="subtitle">ref id: {{patient.uid}}</span>
-        <v-chip v-if="isPaired(patient.uid)" class="chip" :color="'white'" text-color="blue" small>
+        <v-chip v-if="isMe(patient.uid)" class="chip" :color="'white'" text-color="blue" small>
+          <v-avatar>
+            <v-icon>account_circle</v-icon>
+          </v-avatar>
+          You
+        </v-chip>
+        <v-chip v-else-if="isPaired(patient.uid)" class="chip" :color="'white'" text-color="blue" small>
           <v-avatar>
             <v-icon>check_circle</v-icon>
           </v-avatar>
@@ -78,6 +84,13 @@
           return item.uid === uid
         })
         if (patient) {
+          return true
+        } else {
+          return false
+        }
+      },
+      isMe (uid) {
+        if (this.$store.state.profileId === uid) {
           return true
         } else {
           return false
