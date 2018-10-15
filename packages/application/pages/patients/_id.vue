@@ -31,7 +31,7 @@
             <p><b>Medical Conditions:</b> WIP</p>
             </div>
           </v-expansion-panel-content>
-          <v-expansion-panel-content class="panel-content">
+          <v-expansion-panel-content v-if="$store.state.userType == 'doctor'" class="panel-content">
             <h3 slot="header">Packets</h3>
             <div class="panel-content-container">
             <v-list>
