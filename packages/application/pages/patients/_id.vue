@@ -80,9 +80,11 @@
       },
       isPaired (uid) {
         let patient = null
-        patient = this.$store.state.userPatients.find(item => {
-          return item.uid === uid
-        })
+        if (this.$store.state.userPatients) {
+          patient = this.$store.state.userPatients.find(item => {
+            return item.uid === uid
+          })
+        }
         if (patient) {
           return true
         } else {
@@ -104,7 +106,9 @@
         axios.post(`${process.env.apiUrl}/pairs`, payload)
           .then(res => {
             let patients = []
-            patients = this.$store.state.userPatients.slice()
+            if (this.$store.state.userPatients) {
+              patients = this.$store.state.userPatients.slice()
+            }
             patients.push(this.patient)
             this.$store.commit('updatePatients', patients)
           })

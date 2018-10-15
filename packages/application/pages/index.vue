@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <v-card>
+    <v-card v-if="show">
       <v-card-title class="title-container">
         <h2>{{`Welcome ${$store.state.userFirstName}!`}}</h2>
         <span>Visit your 
@@ -22,11 +22,13 @@ export default {
   middleware: 'authenticated',
   data () {
     return {
-      userType: null
+      userType: null,
+      show: true
     }
   },
   methods: {
     logout () {
+      this.show = false
       this.$store.commit('clearAppState')
       // this.$store.commit('clearAuth')
       // this.$store.commit('clearUser')

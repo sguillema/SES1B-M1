@@ -16,7 +16,7 @@
           </v-avatar>
           Paired
         </v-chip>
-        <v-btn v-else-if="!isPaired(patient.uid)" round small color="green" dark @click="pair">Pair</v-btn>
+        <v-btn v-else-if="doctor.uid && !isPaired(doctor.uid)" round small color="green" dark @click="pair">Pair</v-btn>
       </v-card-title>
       <v-card-text class="patient-details">
         <v-expansion-panel :value="0">
@@ -54,9 +54,11 @@
       },
       isPaired (uid) {
         let doctor = null
-        doctor = this.$store.state.userDoctors.find(item => {
-          return item.uid === uid
-        })
+        if (this.$store.state.userDoctors) {
+          doctor = this.$store.state.userDoctors.find(item => {
+            return item.uid === uid
+          })
+        }
         if (doctor) {
           return true
         } else {
@@ -78,7 +80,9 @@
         axios.post(`${process.env.apiUrl}/pairs`, payload)
           .then(res => {
             let doctors = []
-            doctors = this.$store.state.userDoctors.slice()
+            if (this.$store.state.userDoctors) {
+              doctors = this.$store.state.userDoctors.slice()
+            }
             doctors.push(this.doctor)
             this.$store.commit('updateDoctors', doctors)
           })

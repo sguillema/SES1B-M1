@@ -129,12 +129,14 @@
       },
       getDoctors () {
         let doctors = []
-        this.$store.state.userDoctors.forEach(item => {
-          doctors.push({
-            name: `${item.first_name} ${item.last_name}`,
-            id: item.uid
+        if (this.$store.state.userDoctors && this.$store.state.userDoctors.length > 0) {
+          this.$store.state.userDoctors.forEach(item => {
+            doctors.push({
+              name: `${item.first_name} ${item.last_name}`,
+              id: item.uid
+            })
           })
-        })
+        }
         return doctors
       },
       submit () {
@@ -172,7 +174,7 @@
       }
 
       // if (this.$store.state.userPackets == null) {
-      switch (this.$store.state.userType.toLowerCase()) {
+      switch (this.$store.state.userType) {
         case 'doctor':
           this.userType = 'doctor'
 

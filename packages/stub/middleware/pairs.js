@@ -29,13 +29,13 @@ pairs.get('/pairs', async (req, res) => {
         })
 
         let results = []
-        if (!patientId && doctorId) {
+        if (!patientId && doctorId && pairs.length > 0) {
             let patientIds = pairs.map(item => {
                 return item.patient_id
             })
             let patients = await axios.get(`http://localhost:4000/patients?ids=${patientIds.toString()}`)
             results = patients.data
-        } else if (patientId && !doctorId) {
+        } else if (patientId && !doctorId && pairs.length > 0) {
             let doctorIds = pairs.map(item => {
                 return item.doctor_id
             })

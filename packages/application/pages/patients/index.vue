@@ -9,7 +9,7 @@
       </v-tab>
       <v-tab-item :key="'list'">
         <v-card raised>
-          <v-list subheader three-line>
+          <v-list v-if="this.$store.state.userPatients && this.$store.state.userPatients.length > 0" subheader three-line>
             <div v-for="(patient, index) in this.$store.state.userPatients" :key="patient.uid">
               <v-list-tile :to="'patients/' + patient.uid">
                 <v-list-tile-content>
@@ -112,9 +112,11 @@ export default {
     },
     isPaired (uid) {
       let target = null
-      target = this.$store.state.userPatients.find(patient => {
-        return patient.uid === uid
-      })
+      if (this.$store.state.userPatients) {
+        target = this.$store.state.userPatients.find(patient => {
+          return patient.uid === uid
+        })
+      }
 
       if (target) {
         return true
