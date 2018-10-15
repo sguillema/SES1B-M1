@@ -79,7 +79,8 @@ export default {
   /* color: white; */
 }
 .logo{
-  width: 150px;
+  width: 100px;
+  margin: 10px;
 }
 .subtitle{
   opacity: 0.5;
