@@ -4,7 +4,7 @@
       <v-tab :key="'list'" ripple active>
         My Packets
       </v-tab>
-      <v-tab :key="'create'" ripple>
+      <v-tab v-if="userType == 'patient'" :key="'create'" ripple>
         Create Packet
       </v-tab>
       <v-tab-item :key="'list'">
@@ -35,7 +35,7 @@
           </v-list>
         </v-card>
       </v-tab-item>
-      <v-tab-item :key="'create'">
+      <v-tab-item v-if="userType == 'patient'" :key="'create'">
         <v-card raised>
           <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
