@@ -1,16 +1,18 @@
 <template>
   <v-container>
     <v-layout column justify-center align-center fill-height>
-      <img src="../assets/doctor.jpg" alt="This is a doc" class="doc-image" />
+      <v-card style="padding: 40px">
+        <img src="../assets/logo.png" alt="logo" class="doc-image" />
         <div>
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-          <v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
-          <v-btn :disabled="!valid" @click="submit" color="success" block class="login-button">Login</v-btn>
-          <nuxt-link class="register" to="/register">Register</nuxt-link>
-          <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
-        </v-form>
-      </div>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+            <v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required></v-text-field>
+            <v-btn :disabled="!valid" @click="submit" color="success" block class="login-button" depressed>Login</v-btn>
+            <nuxt-link class="register" to="/register">Register</nuxt-link>
+            <v-alert :value="showError" type="error">{{errorMessage}}</v-alert>
+          </v-form>
+        </div>
+      </v-card>
   	</v-layout>
   </v-container>
 </template>

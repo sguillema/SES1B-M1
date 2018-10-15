@@ -2,6 +2,7 @@
   <div class="page">
     <v-card v-if="show">
       <v-card-title class="title-container">
+        <img src="../assets/icon.png" alt="logo" class="logo" />
         <h2>{{`Welcome ${$store.state.userFirstName}!`}}</h2>
         <span>Visit your 
           <nuxt-link v-if="userType == 'patient'" :to="`/patients/${$store.state.profileId}`">patient profile</nuxt-link>
@@ -76,6 +77,9 @@ export default {
   align-items: center;
   /* background-color: #2196f3 !important; */
   /* color: white; */
+}
+.logo{
+  width: 150px;
 }
 .subtitle{
   opacity: 0.5;
