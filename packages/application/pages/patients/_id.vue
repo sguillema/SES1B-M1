@@ -16,7 +16,7 @@
           </v-avatar>
           Paired
         </v-chip>
-        <v-btn v-else round small color="green" dark @click="pair">Pair</v-btn>
+        <v-btn v-else-if="patient.uid && !isPaired(patient.uid)" round small color="green" dark @click="pair">Pair</v-btn>
       </v-card-title>
       <v-card-text class="patient-details">
         <v-expansion-panel :value="0">

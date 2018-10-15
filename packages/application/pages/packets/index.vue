@@ -194,7 +194,7 @@
             this.$store.commit('updateDoctors', pairs.data)
           }
 
-          packets = await axios.get(`${process.env.apiUrl}/packets?user=${this.$store.state.profileId}`)
+          packets = await axios.get(`${process.env.apiUrl}/packets?patient=${this.$store.state.profileId}`)
           packets.data.reverse()
           this.$store.commit('updatePackets', packets.data)
           break
