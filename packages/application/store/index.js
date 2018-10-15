@@ -7,6 +7,8 @@ export const state = () => ({
   userType: null,
   profileId: null,
   pageTitle: null,
+  userFirstName: null,
+  userLastName: null,
   userPackets: [],
   userDoctors: [],
   userPatients: []
@@ -24,6 +26,12 @@ export const mutations = {
   },
   updateUserType (state, data) {
     state.userType = data
+  },
+  updateUserFirstName (state, data) {
+    state.userFirstName = data
+  },
+  updateUserLastName (state, data) {
+    state.userLastName = data
   },
   updatePageTitle (state, data) {
     state.pageTitle = data

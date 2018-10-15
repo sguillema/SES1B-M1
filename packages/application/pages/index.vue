@@ -1,30 +1,30 @@
 <template>
-  <v-container class="container">
-    <v-layout column justify-center align-center>
-      <v-flex xs12 sm8 md6>
-        <!-- <div class="text-xs-center">
-          <img src="/v.png" alt="Vuetify.js" class="mb-5" />
-        </div> -->
-        <v-card>
-          <v-card-title class="headline">Welcome</v-card-title>
-          <v-card-text>
-            <p>This screen is a placeholder for now.</p>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" flat @click="logout()">Log out</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="page">
+    <v-card>
+      <v-card-title class="title-container">
+        <h2>{{`Welcome ${$store.state.userFirstName}!`}}</h2>
+        <span>Visit your 
+          <nuxt-link v-if="userType == 'patient'" :to="`/patients/${$store.state.profileId}`">patient profile</nuxt-link>
+          <nuxt-link v-else-if="userType == 'doctor'" :to="`/doctors/${$store.state.profileId}`">doctor profile</nuxt-link>
+        </span>
+        <span class="subtitle">OR</span>
+        <v-btn color="primary" @click="logout()" depressed><v-icon dark left>arrow_back</v-icon>Log out</v-btn>
+      </v-card-title>
+    </v-card>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export default {
   middleware: 'authenticated',
+  data () {
+    return {
+      userType: null
+    }
+  },
   methods: {
     logout () {
       this.$store.commit('clearAppState')
@@ -39,14 +39,46 @@ export default {
   },
   fetch ({store}) {
     store.commit('updatePageTitle', 'Home')
+  },
+  async mounted () {
+    let profile = null
+    switch (this.$store.state.userType) {
+      case 'doctor':
+        this.userType = 'doctor'
+
+        profile = await axios.get(`${process.env.apiUrl}/doctors/${this.$store.state.profileId}`)
+        this.$store.commit('updateUserFirstName', profile.data.first_name)
+        this.$store.commit('updateUserLastName', profile.data.last_name)
+        break
+
+      case 'patient':
+        this.userType = 'patient'
+
+        profile = await axios.get(`${process.env.apiUrl}/patients/${this.$store.state.profileId}`)
+        this.$store.commit('updateUserFirstName', profile.data.first_name)
+        this.$store.commit('updateUserLastName', profile.data.last_name)
+        break
+    }
   }
 }
 </script>
 
 <style scoped>
-.container{
-  margin-top: 56px;
+.page{
+  margin-top: 48px;
   margin-bottom: 56px;
+}
+.title-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #2196f3 !important; */
+  /* color: white; */
+}
+.subtitle{
+  opacity: 0.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>
 
