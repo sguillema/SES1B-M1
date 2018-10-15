@@ -39,10 +39,11 @@
         <v-card raised>
           <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="doctor" :rules="rules.doctor" label="Doctor" required></v-text-field>
+            <!-- <v-text-field v-model="doctor" :rules="rules.doctor" label="Doctor" required></v-text-field> -->
+            <v-select v-model="doctor" :items="getDoctors()" item-text="name" item-value="id" label="Doctor" outline></v-select>
             <v-text-field v-model="heartRate" label="Heart Rate (optional)" suffix="bpm"></v-text-field>
             <a style="font-size: 12px">Instructions on how to get your heart rate<br><br></a>
-            <v-textarea name="content" :rules="rules.content" label="Message" v-model="content" box required></v-textarea>
+            <v-textarea name="content" :rules="rules.content" label="Message" v-model="content" outline required></v-textarea>
             <v-layout column>
               <h4>Upload Video (Optional)</h4>
               <input type="file" id="video" name="video" accept="video/*">
@@ -91,7 +92,7 @@
         valid: false,
         loading: false,
         dialog: false,
-        doctor: '',
+        doctor: {name: '', id: ''},
         rules: {
           doctor: [v => !!v || 'Doctor is required'],
           content: [v => !!v || 'Content is required']
@@ -125,6 +126,16 @@
         if (target) {
           return `${target.first_name} ${target.last_name}`
         }
+      },
+      getDoctors () {
+        let doctors = []
+        this.$store.state.userDoctors.forEach(item => {
+          doctors.push({
+            name: `${item.first_name} ${item.last_name}`,
+            id: item.uid
+          })
+        })
+        return doctors
       },
       submit () {
         if (this.$refs.form.validate()) {
