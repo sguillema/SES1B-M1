@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="padding: 0px">
     <v-layout column justify-center align-center fill-height>
       <v-card style="padding: 40px">
         <img src="../assets/logo.png" alt="logo" class="doc-image" />
